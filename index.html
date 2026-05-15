@@ -367,14 +367,14 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/7GKjWcR.png" alt="Traditional Active Learning Framework">
+  <img src="fig/fig1-active-learning.png" alt="Traditional Active Learning Framework">
   <div class="fig-cap"><em>Fig. 2</em> — Traditional two-step active learning: drift detection → expert labeling → retrain. The paper identifies two key limitations in this loop. Source: paper Figure 2.</div>
 </div>
 
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/YD3R8XZ.png" alt="Dream Framework">
+  <img src="fig/fig3-dream-framework.png" alt="Dream Framework">
   <div class="fig-cap"><em>Fig. 3</em> — Dream's two-stage loop: (left) Detection uses autoencoder + classifier comparison with no training data needed; (right) Adaptation uses expert concept revisions + joint update. Source: paper Figure 3.</div>
 </div>
 
@@ -549,7 +549,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/8rBZP3N.png" alt="Detection Trick Detail">
+  <img src="fig/fig5-detection-trick.png" alt="Detection Trick Detail">
   <div class="fig-cap"><em>Fig. 4</em> — Dream's detection: rebuild sample via autoencoder → compare classifier predictions M(x) vs M(x̂). Divergence = concept drift. No reference data needed at test time. Source: paper Figure 4.</div>
 </div>
 
@@ -601,7 +601,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
     <h3 data-en="The Full Objective" data-cn="完整目标函数">The Full Objective</h3>
     <div class="eq">L = λ₀L_rec + λ₁L_sep + λ₂L_pre + λ₃L_rel</div>
     <div class="fig" style="margin-top:12px">
-      <img src="https://i.imgur.com/Kh9cQZL.png" alt="Dream Training Objective">
+      <img src="fig/fig4-concept-learning.png" alt="Dream Training Objective">
       <div class="fig-cap"><em>Fig. 5</em> — Dream's four-term loss: reconstruction (L_rec), concept separation (L_sep), concept presence (L_pre), and classifier agreement on rebuilt samples (L_rel). L_rel is the key innovation making detection model-sensitive. Source: paper Equation (1).</div>
     </div>
     <ul>
@@ -739,7 +739,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/7MKjWcR.png" alt="Dataset Overview">
+  <img src="fig/fig6-datasets.png" alt="Dataset Overview">
   <div class="fig-cap"><em>Fig. 6</em> — Dataset overview: Drebin (3,317 samples, 8 families, 2010–2012), Malradar (2,589 samples, 8 families, 2015–2021), Extended (4,410 samples, 180 families, 2015–2020). Hold-out by family simulates brand new family appearance. Source: paper Table 1.</div>
 </div>
 
@@ -785,7 +785,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/pF3N8Xq.png" alt="Experimental Results">
+  <img src="fig/fig7-results.png" alt="Experimental Results">
   <div class="fig-cap"><em>Fig. 7</em> — Dream consistently outperforms all baselines: +11–14% AUC vs best competitor. 0.57ms detection latency (3× faster than CADE, 10× faster than Transcendent). 76.6% labeling reduction to reach same accuracy. Source: paper Table 3 & Table 5.</div>
 </div>
 
@@ -810,7 +810,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="https://i.imgur.com/VJcGh3M.png" alt="Dream vs Baselines Comparison">
+  <img src="fig/table1-comparison.png" alt="Dream vs Baselines Comparison">
   <div class="fig-cap"><em>Fig. 8</em> — Dream is the ONLY method achieving all four properties simultaneously: model-sensitive detection, data autonomy at test time, explanatory adaptation, and both inter-class &amp; intra-class drift handling. Source: paper Table 2.</div>
 </div>
 
