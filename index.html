@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream — CCS 2025</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0e27;
+  --slide-bg: #111827;
+  --accent: #60a5fa;
+  --accent2: #818cf8;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --green: #34d399;
+  --red: #f87171;
+  --yellow: #fbbf24;
+}
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow: hidden; }
+#topbar { position: fixed; top: 0; left: 0; right: 0; height: 52px; background: rgba(0,0,0,0.4); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+#topbar .title { font-size: 14px; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; }
+#topbar .nav { display: flex; gap: 6px; }
+#topbar .nav button { background: var(--card); border: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 13px; padding: 6px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+#topbar .nav button:hover { background: var(--accent); color: #fff; }
+#topbar .nav button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+#topbar .lang-btn { background: var(--card); border: 1px solid rgba(255,255,255,0.12); color: var(--accent); font-size: 13px; padding: 6px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+#topbar .lang-btn:hover { background: var(--accent); color: #fff; }
+#slides { position: fixed; top: 52px; left: 0; right: 0; bottom: 60px; overflow-y: auto; scroll-snap-type: y mandatory; }
+.slide { display: none; min-height: 100%; scroll-snap-align: start; padding: 36px 48px 40px; animation: fadeIn 0.3s ease; }
+.slide.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.slide-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(96,165,250,0.12); padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; }
+.slide-title { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(135deg, #fff 40%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.slide-subtitle { font-size: 20px; color: var(--muted); font-weight: 400; margin-bottom: 32px; line-height: 1.5; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.col { background: var(--card); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.05); }
+.col h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+.col p, .col li { font-size: 15px; line-height: 1.7; color: var(--text); }
+ul { list-style: none; }
+ul li::before { content: '→'; color: var(--accent); margin-right: 8px; }
+ul li { margin-bottom: 8px; }
+.big-num { font-size: 56px; font-weight: 900; color: var(--green); text-align: center; display: block; line-height: 1; margin-bottom: 8px; }
+.near-num { font-size: 40px; font-weight: 800; color: var(--yellow); text-align: center; display: block; line-height: 1; margin-bottom: 8px; }
+.triad { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.card { background: var(--card); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+.card .icon { font-size: 36px; margin-bottom: 12px; display: block; }
+.card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+.card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.flow-item { background: var(--card); border-radius: 12px; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 14px; font-weight: 600; color: var(--accent); }
+.flow-arrow { color: var(--muted); font-size: 20px; }
+.banner { background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(129,140,248,0.15)); border: 1px solid rgba(96,165,250,0.2); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+.banner .label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.banner .val { font-size: 32px; font-weight: 900; color: #fff; }
+.banner .note { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.highlight-box { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); border-radius: 12px; padding: 16px 20px; margin-top: 16px; }
+.highlight-box.red { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.25); }
+.highlight-box.yellow { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.25); }
+.highlight-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.highlight-box.red h4 { color: var(--red); }
+.highlight-box.yellow h4 { color: var(--yellow); }
+.highlight-box h4 { color: var(--green); }
+.highlight-box p { font-size: 14px; color: var(--text); line-height: 1.6; }
+.equation { background: var(--card); border-radius: 10px; padding: 14px 20px; font-family: 'Courier New', monospace; font-size: 14px; color: var(--accent2); text-align: center; margin: 12px 0; border: 1px solid rgba(129,140,248,0.15); }
+.speaker-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.25); color: var(--accent); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+.speaker-tag.s2 { background: rgba(129,140,248,0.15); border-color: rgba(129,140,248,0.25); color: var(--accent2); }
+.speaker-tag.s3 { background: rgba(52,211,153,0.15); border-color: rgba(52,211,153,0.25); color: var(--green); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--card); color: var(--accent); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--accent); }
+td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); }
+tr:hover td { background: rgba(96,165,250,0.05); }
+.badge { display: inline-block; background: rgba(52,211,153,0.15); color: var(--green); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+.badge.y { background: rgba(251,191,36,0.15); color: var(--yellow); }
+.badge.r { background: rgba(248,113,113,0.15); color: var(--red); }
+.next-btn { position: fixed; bottom: 16px; right: 24px; background: var(--accent); color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+.next-btn:hover { transform: scale(1.1); }
+.prev-btn { position: fixed; bottom: 16px; right: 80px; background: var(--card); color: var(--text); border: 1px solid rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.prev-btn:hover { background: var(--accent); color: #fff; }
+.slide-num { position: fixed; bottom: 22px; left: 24px; font-size: 13px; color: var(--muted); z-index: 50; }
+.part-label { font-size: 13px; color: var(--muted); margin-bottom: 4px; font-weight: 600; letter-spacing: 0.05em; }
+.spacer { height: 24px; }
+.col-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="title">DREAM — CCS 2025</div>
+  <div class="nav">
+    <button class="active" onclick="goPart(1)">Part 1</button>
+    <button onclick="goPart(2)">Part 2</button>
+    <button onclick="goPart(3)">Part 3</button>
+    <button onclick="goPart(4)">Extra</button>
+  </div>
+  <button class="lang-btn" onclick="toggleLang()">CN / EN</button>
+</div>
+
+<div id="slides">
+
+<!-- ═══════════════════════════════════════ PART 1 ═══════════════════════════════════════ -->
+<div class="slide active" id="s1">
+
+<div class="speaker-tag">👤 Speaker 1 — Part 1</div>
+<span class="slide-tag">Part 1 · Background</span>
+
+<div class="slide-title" data-en="What Is Concept Drift?" data-cn="什么是 Concept Drift？">What Is Concept Drift?</div>
+<div class="slide-subtitle" data-en="When malware changes, classifiers forget." data-cn="恶意软件在变，分类器却在用旧知识做判断">When malware changes, classifiers forget.</div>
+
+<div class="spacer"></div>
+
+<div class="grid3">
+  <div class="card">
+    <span class="icon">🦠</span>
+    <h4 data-en="Malware Changes Fast" data-cn="恶意软件变化快">Malware Changes Fast</h4>
+    <p data-en="Every month, over 3 million new malware samples are found. Attackers always find new ways to hide." data-cn="每月超过 300 万个新恶意软件样本被发现。攻击者不断找到新的隐藏方式。">Every month, over 3 million new malware samples are found. Attackers always find new ways to hide.</p>
+  </div>
+  <div class="card">
+    <span class="icon">📉</span>
+    <h4 data-en="Classifier Gets Worse" data-cn="分类器准确率下降">Classifier Gets Worse</h4>
+    <p data-en="A model trained on old data can drop to almost random — like guessing. This is concept drift." data-cn="用旧数据训练的模型准确率能跌到接近随机猜测。这就是 concept drift。">A model trained on old data can drop to almost random — like guessing. This is concept drift.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔄</span>
+    <h4 data-en="Two Types of Drift" data-cn="两种 Drift 类型">Two Types of Drift</h4>
+    <p data-en="Intra-class: new version of the same family. Inter-class: a completely new family shows up." data-cn="Intra-class drift：同一个家族的新变种。Inter-class drift：全新的恶意软件家族出现。">Intra-class: new version of the same family. Inter-class: a completely new family shows up.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="banner">
+  <div class="label" data-en="Real Example" data-cn="真实案例">Real Example</div>
+  <div class="val" data-en="Xavier malware — 5 versions in 8 months" data-cn="Xavier 恶意软件 — 8 个月内出现了 5 个版本">Xavier malware — 5 versions in 8 months</div>
+  <div class="note" data-en="Intra-class drift: same family, new versions keep appearing" data-cn="这是典型的 intra-class drift：同一个家族不断推出新版本">Intra-class drift: same family, new versions keep appearing</div>
+</div>
+
+<div class="highlight-box">
+  <h4 data-en="The Core Problem" data-cn="核心问题">The Core Problem</h4>
+  <p data-en="We have a classifier. It was good before. But the malware world changed. Now the classifier keeps making wrong calls — and we need a way to know WHEN it is going wrong and HOW to fix it." data-cn="我们有一个分类器，之前很准。但恶意软件世界变了，分类器开始不断报错。我们需要一个方法：知道它什么时候开始出问题，以及怎么修复它。">We have a classifier. It was good before. But the malware world changed. Now the classifier keeps making wrong calls — and we need a way to know WHEN it is going wrong and HOW to fix it.</p>
+</div>
+
+</div>
+
+<!-- ── Slide 2 ── -->
+<div class="slide" id="s2">
+
+<div class="speaker-tag">👤 Speaker 1 — Part 1</div>
+<span class="slide-tag">Part 1 · Why Old Ways Fail</span>
+
+<div class="slide-title" data-en="Why Old Ways Don't Work" data-cn="老方法为什么不管用了">Why Old Ways Don't Work</div>
+
+<div class="grid2">
+  <div class="col">
+    <h3 data-en="Detection Problem" data-cn="检测层面">Detection Problem</h3>
+    <ul>
+      <li data-en="Old detectors learn their OWN idea of what malware looks like — they ignore what the target classifier actually uses." data-cn="旧检测器学的是自己理解的恶意软件特征，完全忽略目标分类器真正依赖的模式。">Old detectors learn their OWN idea of what malware looks like — they ignore what the target classifier actually uses.</li>
+      <li data-en="They also need to look at training data all the time — not safe for real deployment." data-cn="它们还需要一直访问训练数据，这在实际部署中不安全且占用资源。">They also need to look at training data all the time — not safe for real deployment.</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h3 data-en="Adaptation Problem" data-cn="适配层面">Adaptation Problem</h3>
+    <ul>
+      <li data-en="When experts label samples, they do deep analysis — static analysis, dynamic analysis, rich reasoning." data-cn="专家在标注目录样本时，做的是深度分析：静态分析、动态分析、很丰富的推理。">When experts label samples, they do deep analysis — static analysis, dynamic analysis, rich reasoning.</li>
+      <li data-en="But the model only gets a simple LABEL. All that rich thinking is thrown away." data-cn="但模型只收到一个简单的标签。这些丰富的分析推理全部被丢弃了。">But the model only gets a simple LABEL. All that rich thinking is thrown away.</li>
+      <li data-en="So we need to label way too many samples to make the model update work." data-cn="所以我们需要标注目录大量样本来让模型更新有效，这太费时了。">So we need to label way too many samples to make the model update work.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="highlight-box red">
+  <h4 data-en="Result" data-cn="结果">Result</h4>
+  <p data-en="High cost. Slow response. Model still gets things wrong." data-cn="成本高、反应慢、模型还是出错。">High cost. Slow response. Model still gets things wrong.</p>
+</div>
+
+</div>
+
+<!-- ── Slide 3: Framework Overview ── -->
+<div class="slide" id="s3">
+
+<div class="speaker-tag">👤 Speaker 1 — Part 1</div>
+<span class="slide-tag">Part 1 · Two-Stage Framework</span>
+
+<div class="slide-title" data-en="The Standard Two-Stage Plan" data-cn="标准的两阶段方案">The Standard Two-Stage Plan</div>
+<div class="slide-subtitle" data-en="Every good drift solution has two steps." data-cn="所有好的 drift 解决方案都分为两步。">Every good drift solution has two steps.</div>
+
+<div class="triad">
+  <div class="card">
+    <span class="icon">🔍</span>
+    <h4 data-en="Step 1 — Detect" data-cn="第一步：检测 Drift">Step 1 — Detect</h4>
+    <p data-en="Look at new samples. Decide: has this malware changed enough to fool our model? Pick the ones that look weird." data-cn="看新样本，判断：这个恶意软件是不是已经变化到能骗过我们的模型了？挑出那些看起来异常的。">Look at new samples. Decide: has this malware changed enough to fool our model? Pick the ones that look weird.</p>
+    <div class="spacer"></div>
+    <div class="equation">Drift Detection</div>
+  </div>
+  <div class="card">
+    <span class="icon">🔄</span>
+    <h4 data-en="Step 2 — Adapt" data-cn="第二步：适配">Step 2 — Adapt</h4>
+    <p data-en="Send weird samples to experts. Experts label them. Add labeled samples to training set. Retrain the model." data-cn="把异常样本送去给专家，专家进行标注，把标注后的样本加入训练集，重新训练模型。">Send weird samples to experts. Experts label them. Add labeled samples to training set. Retrain the model.</p>
+    <div class="spacer"></div>
+    <div class="equation">Drift Adaptation</div>
+  </div>
+  <div class="card">
+    <span class="icon">💡</span>
+    <h4 data-en="Dream's Twist" data-cn="Dream 的改进">Dream's Twist</h4>
+    <p data-en="We make both steps better. Detection is smarter. Adaptation uses expert knowledge fully — not just a label." data-cn="Dream 让两步都变得更好：检测更智能；适配充分利用专家知识，不只是一个标签。">We make both steps better. Detection is smarter. Adaptation uses expert knowledge fully — not just a label.</p>
+    <div class="spacer"></div>
+    <div class="equation">Active Learning Loop</div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+<div class="highlight-box">
+  <h4 data-en="The Gap in Existing Work" data-cn="现有工作的缺口">The Gap in Existing Work</h4>
+  <p data-en="Most papers focus on detection. Very few try to make the ADAPTATION step better. Dream does BOTH." data-cn="大多数论文只关注检测，几乎没有论文去改进适配阶段。Dream 两步都做了。">Most papers focus on detection. Very few try to make the ADAPTATION step better. Dream does BOTH.</p>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ PART 2 ═══════════════════════════════════════ -->
+<div class="slide" id="s4">
+
+<div class="speaker-tag s2">👤 Speaker 2 — Part 2</div>
+<span class="slide-tag">Part 2 · Dream System</span>
+
+<div class="slide-title" data-en="What Is Dream?" data-cn="Dream 是什么">What Is Dream?</div>
+<div class="slide-subtitle" data-en="A new system that fights concept drift — detection AND adaptation, together." data-cn="一个同时解决检测和适配两大问题的新系统。">A new system that fights concept drift — detection AND adaptation, together.</div>
+
+<div class="triad">
+  <div class="card">
+    <span class="icon">🧠</span>
+    <h4 data-en="Model-Sensitive Detection" data-cn="感知分类器的检测">Model-Sensitive Detection</h4>
+    <p data-en="Dream's detector knows how the target classifier works. It doesn't just guess on its own." data-cn="Dream 的检测器知道目标分类器是怎么工作的，而不是自己瞎猜。">Dream's detector knows how the target classifier works. It doesn't just guess on its own.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔒</span>
+    <h4 data-en="No Training Data Needed" data-cn="无需训练数据">No Training Data Needed</h4>
+    <p data-en="Old methods need training data at test time. Dream does NOT. True data autonomy." data-cn="旧方法在测试时需要训练数据。Dream 不需要，实现了真正的数据自主。">Old methods need training data at test time. Dream does NOT. True data autonomy.</p>
+  </div>
+  <div class="card">
+    <span class="icon">💬</span>
+    <h4 data-en="Explains the Drift" data-cn="能解释 Drift">Explains the Drift</h4>
+    <p data-en="When drift is found, Dream shows WHICH concept caused the problem — not just "this is bad"." data-cn="当检测到 drift 时，Dream 会显示是哪个行为概念出了问题，而不只是说"这个样本有问题"。">When drift is found, Dream shows WHICH concept caused the problem — not just "this is bad".</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ── Slide 5 ── -->
+<div class="slide" id="s5">
+
+<div class="speaker-tag s2">👤 Speaker 2 — Part 2</div>
+<span class="slide-tag">Part 2 · Concept Space</span>
+
+<div class="slide-title" data-en="How Dream Learns Concepts" data-cn="Dream 是怎么学习概念（Concepts）的">How Dream Learns Concepts</div>
+
+<div class="split">
+  <div class="col">
+    <h3 data-en="What Are Concepts Here?" data-cn="这里的"概念"是什么">What Are Concepts Here?</h3>
+    <p data-en="A concept = a type of malicious behavior. Like:" data-cn="一个概念 = 一种恶意行为类型。比如：">A concept = a type of malicious behavior. Like:</p>
+    <ul>
+      <li data-en="Stealing privacy info (SMS, contacts...)" data-cn="窃取隐私信息（短信、联系人等）">Stealing privacy info (SMS, contacts...)</li>
+      <li data-en="Remote control by attacker" data-cn="攻击者远程控制">Remote control by attacker</li>
+      <li data-en="Silent downloads" data-cn="静默下载">Silent downloads</li>
+      <li data-en="Bank info stealing" data-cn="盗取银行信息">Bank info stealing</li>
+      <li data-en="Ransomware" data-cn="勒索软件">Ransomware</li>
+      <li data-en="Premium service abuse" data-cn="滥用付费服务">Premium service abuse</li>
+    </ul>
+    <p data-en="Dream maps each sample into a latent SPACE where each direction means one of these behaviors." data-cn="Dream 把每个样本映射到一个隐空间，这个空间的每个方向代表一种恶意行为类型。">Dream maps each sample into a latent SPACE where each direction means one of these behaviors.</p>
+  </div>
+  <div class="col">
+    <h3 data-en="How Does Dream Learn Them?" data-cn="Dream 怎么学习这些概念">How Does Dream Learn Them?</h3>
+    <p data-en="Two signals at the same time:" data-cn="同时用两个训练信号：">Two signals at the same time:</p>
+    <ul>
+      <li data-en="Supervised: link latent directions to classifier's internal activations" data-cn="Supervised（监督）信号：把隐空间方向和分类器的内部激活联系起来">Supervised: link latent directions to classifier's internal activations</li>
+      <li data-en="Contrastive: samples with same concept stay close; different concepts stay apart" data-cn="Contrastive（对比）信号：相同概念的样本在隐空间中接近，不同概念的样本远离">Contrastive: samples with same concept stay close; different concepts stay apart</li>
+    </ul>
+    <div class="spacer"></div>
+    <div class="equation">L = λ₀L_rec + λ₁L_sep + λ₂L_pre + λ₃L_rel</div>
+    <p data-en="The detector learns what the CLASSIFIER cares about — not something independent." data-cn="检测器学会的是分类器真正关心的特征，而不是某个独立的衡量标准。">The detector learns what the CLASSIFIER cares about — not something independent.</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ── Slide 6 ── -->
+<div class="slide" id="s6">
+
+<div class="speaker-tag s2">👤 Speaker 2 — Part 2</div>
+<span class="slide-tag">Part 2 · Detection Method</span>
+
+<div class="slide-title" data-en="The Drift Detection Trick" data-cn=" Drift 检测的诀窍">The Drift Detection Trick</div>
+<div class="slide-subtitle" data-en="A clever way to find drift without touching training data." data-cn="一个巧妙的办法，无需访问训练数据就能检测 drift。">A clever way to find drift without touching training data.</div>
+
+<div class="spacer"></div>
+
+<div class="flow">
+  <div class="flow-item" data-en="① New sample x comes in" data-cn="① 新样本 x 进来">① New sample x comes in</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item" data-en="② Detector rebuilds x → x̂" data-cn="② 检测器重建 x → x̂">② Detector rebuilds x → x̂</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item" data-en="③ Feed x AND x̂ to classifier" data-cn="③ 把 x 和 x̂ 都输入分类器">③ Feed x AND x̂ to classifier</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item" data-en="④ Compare the two predictions" data-cn="④ 比较两次预测结果">④ Compare the two predictions</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item" data-en="⑤ Drift Score!" data-cn="⑤ 得到 Drift 分数！">⑤ Drift Score!</div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="grid2">
+  <div class="highlight-box">
+    <h4 data-en="Predictions Agree?" data-cn="两次预测结果一致？">Predictions Agree?</h4>
+    <p data-en="Good. The concepts used to understand x are still reliable. Low drift score." data-cn="好，说明用来理解 x 的那些概念仍然可靠。Drift 分数低。">Good. The concepts used to understand x are still reliable. Low drift score.</p>
+  </div>
+  <div class="highlight-box red">
+    <h4 data-en="Predictions Disagree?" data-cn="两次预测结果不一致？">Predictions Disagree?</h4>
+    <p data-en="Bad. The concepts that built x̂ don't match what the classifier expects. High drift score. → Alert!" data-cn="坏了，用来重建 x̂ 的概念和分类器的预期不匹配。Drift 分数高，发出警报！">Bad. The concepts that built x̂ don't match what the classifier expects. High drift score. → Alert!</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="highlight-box">
+  <h4 data-en="Why This Is Smart" data-cn="为什么这个方法很聪明">Why This Is Smart</h4>
+  <p data-en="The detector uses the SAME classifier it is monitoring. No other data needed. If the classifier changes its mind after seeing a rebuilt version — something is wrong." data-cn="检测器在监控的是它所依赖的同一个分类器，不需要其他数据。如果分类器在看到重建版本后改变了判断，说明出问题了。">The detector uses the SAME classifier it is monitoring. No other data needed. If the classifier changes its mind after seeing a rebuilt version — something is wrong.</p>
+</div>
+
+</div>
+
+<!-- ── Slide 7 ── -->
+<div class="slide" id="s7">
+
+<div class="speaker-tag s2">👤 Speaker 2 — Part 2</div>
+<span class="slide-tag">Part 2 · Adaptation Method</span>
+
+<div class="slide-title" data-en="How Experts Help Fix the Model" data-cn="专家如何帮助修复模型">How Experts Help Fix the Model</div>
+
+<div class="grid2">
+  <div class="col">
+    <h3 data-en="Old Way" data-cn="老方法">Old Way</h3>
+    <p data-en="Expert looks at a sample." data-cn="专家看一个样本。">Expert looks at a sample.</p>
+    <p data-en="Expert says: this is family X." data-cn="专家说：这是 X 家族。">Expert says: this is family X.</p>
+    <p data-en="Model only gets the label. All the WHY is lost." data-cn="模型只收到一个标签。所有关于"为什么"的推理都丢失了。">Model only gets the label. All the WHY is lost.</p>
+    <div class="highlight-box red">
+      <h4 data-en="Problem" data-cn="问题">Problem</h4>
+      <p data-en="Need lots and lots of labeled samples to update the model." data-cn="需要标注目录大量样本才能让模型更新有效。">Need lots and lots of labeled samples to update the model.</p>
+    </div>
+  </div>
+  <div class="col">
+    <h3 data-en="Dream's Way" data-cn="Dream 的方法">Dream's Way</h3>
+    <p data-en="Expert looks at a sample." data-cn="专家看一个样本。">Expert looks at a sample.</p>
+    <p data-en="Dream shows: which CONCEPT caused the drift? (e.g., unusual SMS-stealing behavior)" data-cn="Dream 会展示：具体是哪个概念引起了 drift？（例如：不寻常的短信窃取行为）">Dream shows: which CONCEPT caused the drift? (e.g., unusual SMS-stealing behavior)</p>
+    <p data-en="Expert says: label AND concept revision." data-cn="专家给出：标签 + 概念修订。">Expert says: label AND concept revision.</p>
+    <div class="highlight-box">
+      <h4 data-en="Better" data-cn="更好">Better</h4>
+      <p data-en="Model gets rich guidance. Updates are much more efficient. Far fewer samples needed." data-cn="模型收到丰富的指导，更新效率大幅提升，需要的样本数量大大减少。">Model gets rich guidance. Updates are much more efficient. Far fewer samples needed.</p>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="banner">
+  <div class="label" data-en="The Joint Update" data-cn="联合更新">The Joint Update</div>
+  <div class="val" data-en="Classifier + Detector both update together" data-cn="分类器 + 检测器一起更新">Classifier + Detector both update together</div>
+  <div class="note" data-en="Expert feedback flows back into BOTH models — making future detection more aligned" data-cn="专家反馈同时作用于两个模型——让后续检测更准确">Expert feedback flows back into BOTH models — making future detection more aligned</div>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ PART 3 ═══════════════════════════════════════ -->
+<div class="slide" id="s8">
+
+<div class="speaker-tag s3">👤 Speaker 3 — Part 3</div>
+<span class="slide-tag">Part 3 · Results</span>
+
+<div class="slide-title" data-en="What Dream Achieves" data-cn="Dream 取得了什么成果">What Dream Achieves</div>
+
+<div class="grid3">
+  <div class="card">
+    <span class="icon">📈</span>
+    <h4 data-en="Detection AUC" data-cn="检测 AUC 提升">Detection AUC</h4>
+    <p data-en="+11.5% over Transcendent, +12.0% over CADE, +13.6% over Probability" data-cn="">+11.5% 比 Transcendent，+12.0% 比 CADE，+13.6% 比 Probability</p>
+  </div>
+  <div class="card">
+    <span class="icon">💰</span>
+    <h4 data-en="Labeling Saved" data-cn="标注成本节省">Labeling Saved</h4>
+    <p data-en="76.6% fewer labeled samples to reach the same accuracy" data-cn="达到同样准确率，只需要 23.4% 的标注样本，节省了 76.6%">76.6% fewer labeled samples to reach the same accuracy</p>
+  </div>
+  <div class="card">
+    <span class="icon">⚡</span>
+    <h4 data-en="Speed" data-cn="检测速度">Speed</h4>
+    <p data-en="0.57 ms per sample — 3x faster than CADE" data-cn="每个样本 0.57 毫秒 — 比 CADE 快 3 倍">0.57 ms per sample — 3x faster than CADE</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ── Slide 9 ── -->
+<div class="slide" id="s9">
+
+<div class="speaker-tag s3">👤 Speaker 3 — Part 3</div>
+<span class="slide-tag">Part 3 · Key Numbers</span>
+
+<div class="slide-title" data-en="The Numbers" data-cn="数据说话">The Numbers</div>
+
+<div class="col-3">
+  <div class="card">
+    <span class="big-num">76.6%</span>
+    <h4 data-en="Less Labeling Work" data-cn="标注工作量减少">Less Labeling Work</h4>
+    <p data-en="To hit 90% accuracy: Dream needs 19 samples. Best old method needs 84. That's huge." data-cn="达到 90% 准确率，Dream 只需 19 个样本，最好的老方法需要 84 个。差距很大。">To hit 90% accuracy: Dream needs 19 samples. Best old method needs 84. That's huge.</p>
+  </div>
+  <div class="card">
+    <span class="big-num">11–14%</span>
+    <h4 data-en="AUC Boost" data-cn="AUC 提升">AUC Boost</h4>
+    <p data-en="Across Drebin, Malradar datasets, three different classifiers. Consistent improvement." data-cn="横跨 Drebin、Malradar 两个数据集，三种不同分类器，持续的提升。">Across Drebin, Malradar datasets, three different classifiers. Consistent improvement.</p>
+  </div>
+  <div class="card">
+    <span class="big-num">0.57ms</span>
+    <h4 data-en="Fast Detection" data-cn="快速检测">Fast Detection</h4>
+    <p data-en="Per sample detection time. 3x faster than CADE. 10x faster than Transcendent." data-cn="单个样本检测时间。比 CADE 快 3 倍，比 Transcendent 快 10 倍。">Per sample detection time. 3x faster than CADE. 10x faster than Transcendent.</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ── Slide 10 ── -->
+<div class="slide" id="s10">
+
+<div class="speaker-tag s3">👤 Speaker 3 — Part 3</div>
+<span class="slide-tag">Part 3 · Datasets & Setup</span>
+
+<div class="slide-title" data-en="How We Tested Dream" data-cn="我们是怎么测试 Dream 的">How We Tested Dream</div>
+
+<div class="grid2">
+  <div class="col">
+    <h3 data-en="Two Datasets" data-cn="两个数据集">Two Datasets</h3>
+    <ul>
+      <li><strong>Drebin</strong> — 3,317 samples, 8 families, 2010–2012</li>
+      <li><strong>Malradar</strong> — 2,589 samples, 8 families, 2015–2021</li>
+      <li data-en="10 behavioral concepts labeled for Malradar" data-cn="Malradar 有 10 种行为概念标注">10 behavioral concepts labeled for Malradar</li>
+      <li data-en="Extended test: 4,410 samples, 180 families, 2015–2020" data-cn="扩展测试：4,410 个样本，180 个家族，2015–2020">Extended test: 4,410 samples, 180 families, 2015–2020</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h3 data-en="Three Classifiers" data-cn="三种分类器">Three Classifiers</h3>
+    <ul>
+      <li><strong>Drebin</strong> — binary feature vectors, MLP</li>
+      <li><strong>Mamadroid</strong> — API call pairs, Markov + MLP</li>
+      <li><strong>Damd</strong> — raw opcode sequences, CNN</li>
+    </ul>
+    <p data-en="All three are real, widely-used malware classifiers." data-cn="这三种都是真实广泛使用的恶意软件分类器。">All three are real, widely-used malware classifiers.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="table-wrap">
+<table>
+  <tr><th data-en="Method" data-cn="方法">Method</th><th>AUC vs Transcendent</th><th>AUC vs CADE</th><th data-en="Speed" data-cn="速度">Speed</th></tr>
+  <tr><td>Transcendent</td><td>baseline</td><td>—</td><td>5.75 ms</td></tr>
+  <tr><td>CADE</td><td>+0%</td><td>baseline</td><td>1.89 ms</td></tr>
+  <tr><td><strong>Dream</strong> <span class="badge">BEST</span></td><td><strong>+11.5%</strong></td><td><strong>+12.0%</strong></td><td><strong>0.57 ms</strong></td></tr>
+</table>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ EXTRA / CONCLUSION ═══════════════════════════════════════ -->
+<div class="slide" id="s11">
+
+<span class="slide-tag">Extra · Comparison</span>
+
+<div class="slide-title" data-en="Dream vs The Rest" data-cn="Dream 与其他方法对比">Dream vs The Rest</div>
+
+<div class="table-wrap">
+<table>
+  <tr>
+    <th data-en="Property" data-cn="特性">Property</th>
+    <th>Transcendent</th>
+    <th>CADE</th>
+    <th>HCC</th>
+    <th><strong>Dream</strong> <span class="badge">Ours</span></th>
+  </tr>
+  <tr>
+    <td data-en="Model-sensitive detection" data-cn="感知分类器的检测">Model-sensitive detection</td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge">✓</span></td>
+  </tr>
+  <tr>
+    <td data-en="Data autonomy" data-cn="数据自主性">Data autonomy</td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge">✓</span></td>
+  </tr>
+  <tr>
+    <td data-en="Explanatory adaptation" data-cn="可解释的适配">Explanatory adaptation</td>
+    <td><span class="badge y">Partial</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge">✓</span></td>
+  </tr>
+  <tr>
+    <td data-en="Inter-class + Intra-class" data-cn="家族间 + 家族内 drift">Inter-class + Intra-class</td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge y">Partial</span></td>
+    <td><span class="badge y">Partial</span></td>
+    <td><span class="badge">✓</span></td>
+  </tr>
+  <tr>
+    <td data-en="Fast detection" data-cn="快速检测">Fast detection</td>
+    <td><span class="badge y">Medium</span></td>
+    <td><span class="badge y">Medium</span></td>
+    <td><span class="badge r">✗</span></td>
+    <td><span class="badge">✓</span></td>
+  </tr>
+</table>
+</div>
+
+</div>
+
+<!-- ── Slide 12: Conclusion ── -->
+<div class="slide" id="s12">
+
+<span class="slide-tag">Conclusion</span>
+
+<div class="slide-title" data-en="Takeaways" data-cn="总结">Takeaways</div>
+
+<div class="triad">
+  <div class="card">
+    <span class="icon">🔍</span>
+    <h4 data-en="Smart Detection" data-cn="智能检测">Smart Detection</h4>
+    <p data-en="Dream detects drift by checking if the classifier agrees with itself — on a rebuilt sample. No training data needed." data-cn="Dream 通过检查分类器对重建样本的判断是否与原样本一致来检测 drift，不需要任何训练数据。">Dream detects drift by checking if the classifier agrees with itself — on a rebuilt sample. No training data needed.</p>
+  </div>
+  <div class="card">
+    <span class="icon">💬</span>
+    <h4 data-en="Expert-Friendly" data-cn="对专家友好">Expert-Friendly</h4>
+    <p data-en="Experts don't just give labels. They also refine WHICH concepts are wrong. That extra info makes model updates way more efficient." data-cn="专家不只是给标签，还能指出哪些概念是错的。这额外的指导让模型更新高效得多。">Experts don't just give labels. They also refine WHICH concepts are wrong. That extra info makes model updates way more efficient.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🚀</span>
+    <h4 data-en="Big Savings" data-cn="大幅节省">Big Savings</h4>
+    <p data-en="Same accuracy with 76.6% less labeling work. 3x faster detection. Works for both inter-class and intra-class drift." data-cn="同样准确率，标注工作量减少 76.6%。检测速度快 3 倍。同时适用于家族间和家族内 drift。">Same accuracy with 76.6% less labeling work. 3x faster detection. Works for both inter-class and intra-class drift.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="banner">
+  <div class="label" data-en="Paper" data-cn="论文">Paper</div>
+  <div class="val">CCS '25 · DOI: 10.1145/3719027.3744792</div>
+  <div class="note" data-en=" Zhejiang University · State Key Laboratory of Blockchain and Data Security" data-cn="浙江大学 · 区块链与数据安全国家重点实验室"> Zhejiang University · State Key Laboratory of Blockchain and Data Security</div>
+</div>
+
+<div class="highlight-box" style="text-align:center;">
+  <h4 data-en="Thank You" data-cn="谢谢！">Thank You</h4>
+  <p data-en="Questions welcome 🎤" data-cn="欢迎提问 🎤">Questions welcome 🎤</p>
+</div>
+
+</div>
+
+</div><!-- end slides -->
+
+<button class="next-btn" onclick="nextSlide()">›</button>
+<button class="prev-btn" onclick="prevSlide()">‹</button>
+<div class="slide-num" id="slideNum">1 / 12</div>
+
+<script>
+let lang = 'en';
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const numEl = document.getElementById('slideNum');
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[i].classList.add('active');
+  current = i;
+  numEl.textContent = (i + 1) + ' / ' + total;
+  applyLang();
+}
+
+function nextSlide() { showSlide((current + 1) % total); }
+function prevSlide() { showSlide((current - 1 + total) % total); }
+
+function goPart(p) {
+  const map = {1:0, 2:3, 3:7, 4:10};
+  showSlide(map[p] || 0);
+}
+
+function toggleLang() {
+  lang = lang === 'en' ? 'cn' : 'en';
+  document.querySelectorAll('[data-' + lang]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+}
+
+function applyLang() {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (!el.getAttribute('data-' + lang)) return;
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+showSlide(0);
+</script>
+</body>
+</html>
