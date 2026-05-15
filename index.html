@@ -161,13 +161,13 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 /* FIGURES */
 .fig{display:block;text-align:center;margin:14px 0}
-.fig img{max-width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08);max-height:220px;object-fit:contain}
+.fig img{max-width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08);max-height:320px;object-fit:contain;background:rgba(255,255,255,.02)}
 .fig-cap{font-size:12px;color:var(--muted);margin-top:6px;font-style:italic}
 .fig-cap em{color:var(--accent);font-style:normal}
 
 /* FIGURES */
 .fig{display:block;text-align:center;margin:16px 0}
-.fig img{max-width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.08);max-height:230px;object-fit:contain}
+.fig img{max-width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.08);max-height:320px;object-fit:contain;background:rgba(255,255,255,.02)}
 .fig-cap{font-size:12px;color:var(--muted);margin-top:5px;font-style:italic}
 .fig-cap em{color:var(--accent);font-style:normal}
 
@@ -301,7 +301,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <div class="note" data-en="This is called CONCEPT DRIFT — the world changed, the model did not" data-cn="这叫做 CONCEPT DRIFT——世界变了，模型没变">This is called CONCEPT DRIFT — the world changed, the model did not</div>
 </div>
 
-<div class="script"><strong>Speaker tip:</strong> <span data-en="Emphasize: 'The model STILL gives an answer. It still says "this is malware" or "benign". But it's basically guessing. That's the danger.'" data-cn="强调：'模型仍然给出答案。它仍然说"这是恶意软件"或"正常"。但它基本上在猜测。这就是危险所在。'">Emphasize: 'The model STILL gives an answer. It still says "this is malware" or "benign". But it's basically guessing. That's the danger.'"</span></div>
+<div class="script"><strong>Speaker tip:</strong> <span data-en="Emphasize: 'The model STILL gives an answer. It still says &quot;this is malware&quot; or &quot;benign&quot;. But it's basically guessing. That's the danger.'" data-cn="强调：'模型仍然给出答案。它仍然说&quot;这是恶意软件&quot;或&quot;正常&quot;。但它基本上在猜测。这就是危险所在。'">Emphasize: 'The model STILL gives an answer. It still says "this is malware" or "benign". But it's basically guessing. That's the danger.'</span></div>
 </div>
 
 <!-- SLIDE 2 -->
@@ -337,6 +337,12 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <h4 data-en="The paper's focus" data-cn="论文的关注点">The paper's focus</h4>
   <p data-en="Dream focuses mainly on INTER-CLASS drift — new malware families appearing. This is the harder problem: the model needs to recognize a family it has NEVER seen before." data-cn="Dream 主要关注 INTER-CLASS drift——出现新的恶意软件家族。这是更难的问题：模型需要识别一个从未见过的家族。">Dream focuses mainly on INTER-CLASS drift — new malware families appearing. This is the harder problem: the model needs to recognize a family it has NEVER seen before.</p>
 </div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="fig/fig2-two-types.png" alt="Inter-class vs intra-class drift illustrations">
+  <div class="fig-cap"><em>Paper visual</em> — Concrete examples of intra-class and inter-class drift, which makes the transition into Dream's target setting much clearer.</div>
+</div>
 </div>
 
 <!-- SLIDE 3 -->
@@ -352,7 +358,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
     <div class="step-num">1</div>
     <div class="step-content">
       <h4 data-en="DRIFT DETECTION — Find weird samples" data-cn="Drift 检测——找出可疑样本">DRIFT DETECTION — Find weird samples</h4>
-      <p data-en="Periodically scan new incoming samples. Use statistics or ML to find samples that look "far" from the training data." data-cn="定期扫描新来的样本。用统计学或机器学习方法找出看起来"远离"训练数据的样本。">Periodically scan new incoming samples. Use statistics or ML to find samples that look "far" from the training data.</p>
+      <p data-en="Periodically scan new incoming samples. Use statistics or ML to find samples that look &quot;far&quot; from the training data." data-cn="定期扫描新来的样本。用统计学或机器学习方法找出看起来&quot;远离&quot;训练数据的样本。">Periodically scan new incoming samples. Use statistics or ML to find samples that look "far" from the training data.</p>
     </div>
   </div>
   <div class="step-item">
@@ -379,7 +385,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 
 <div class="spacer"></div>
-<div class="script"><strong>Speaker tip:</strong> <span data-en="Draw on the board: [New Samples] → [Detector] → [Experts Label] → [Retrain]. Ask audience: 'What could go wrong with Step 1?' Then: 'What could go wrong with Step 2?'" data-cn="在白板上画：[新样本] → [检测器] → [专家标注] → [重新训练]。问观众：'第一步可能出什么问题？'然后：'第二步呢？'">Draw on the board: [New Samples] → [Detector] → [Experts Label] → [Retrain]. Ask audience: 'What could go wrong with Step 1?' Then: 'What could go wrong with Step 2?'"</span></div>
+<div class="script"><strong>Speaker tip:</strong> <span data-en="Draw on the board: [New Samples] → [Detector] → [Experts Label] → [Retrain]. Ask audience: 'What could go wrong with Step 1?' Then: 'What could go wrong with Step 2?'" data-cn="在白板上画：[新样本] → [检测器] → [专家标注] → [重新训练]。问观众：'第一步可能出什么问题？'然后：'第二步呢？'">Draw on the board: [New Samples] → [Detector] → [Experts Label] → [Retrain]. Ask audience: 'What could go wrong with Step 1?' Then: 'What could go wrong with Step 2?'</span></div>
 </div>
 
 <!-- SLIDE 4 -->
@@ -391,7 +397,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="grid2">
   <div class="col">
-    <h3 data-en="Problem 1: Blind Detector 🔍" data-cn="问题 1：检测器"视而不见" 🔍">Problem 1: Blind Detector 🔍</h3>
+    <h3 data-en="Problem 1: Blind Detector 🔍" data-cn="问题 1：检测器‘视而不见’ 🔍">Problem 1: Blind Detector 🔍</h3>
     <p data-en="Most drift detectors train their OWN model. They ignore what the TARGET classifier actually uses to decide." data-cn="大多数 drift 检测器训练自己的模型。它们忽略了目标分类器实际依赖什么来做判断。">Most drift detectors train their OWN model. They ignore what the TARGET classifier actually uses to decide.</p>
     <div class="hl red">
       <h4 data-en="Analogy" data-cn="类比">Analogy</h4>
@@ -400,7 +406,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
   </div>
   <div class="col">
     <h3 data-en="Problem 2: Expert Knowledge Wasted 💔" data-cn="问题 2：专家知识被浪费 💔">Problem 2: Expert Knowledge Wasted 💔</h3>
-    <p data-en="Experts do deep analysis — static analysis, dynamic analysis, behavioral reasoning. But the model only gets a LABEL. All that WHY is lost." data-cn="专家做深度分析——静态分析、动态分析、行为推理。但模型只收到一个标签。所有"为什么"都丢失了。">Experts do deep analysis — static analysis, dynamic analysis, behavioral reasoning. But the model only gets a LABEL. All that WHY is lost.</p>
+    <p data-en="Experts do deep analysis — static analysis, dynamic analysis, behavioral reasoning. But the model only gets a LABEL. All that WHY is lost." data-cn="专家做深度分析——静态分析、动态分析、行为推理。但模型只收到一个标签。所有‘为什么’都丢失了。">Experts do deep analysis — static analysis, dynamic analysis, behavioral reasoning. But the model only gets a LABEL. All that WHY is lost.</p>
     <div class="hl red">
       <h4 data-en="Result" data-cn="结果">Result</h4>
       <p data-en="Need TONS of labeled samples to make retraining work. Very expensive." data-cn="需要大量标注样本来让重新训练有效。很贵。">Need TONS of labeled samples to make retraining work. Very expensive.</p>
@@ -423,7 +429,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="slide-title" data-en="Quick Check — Think Before We Move On!" data-cn="小测验——我们继续之前先想一想！">Quick Check — Think Before We Move On!</div>
 
 <div class="quiz-q" id="quiz1">
-  <h4 data-en="❓ What is concept drift in malware classification?" data-cn="❓ 恶意软件分类中，什么是 concept drift？">❓ What is when the relationship between input features and labels changes over time." data-cn="❓ 恶意软件分类中，什么是 concept drift？</h4>
+  <h4 data-en="❓ What is concept drift in malware classification?" data-cn="❓ 恶意软件分类中，什么是 concept drift？">❓ What is concept drift in malware classification?</h4>
   <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz1-feedback')" data-en="When malware is detected by antivirus" data-cn="当恶意软件被杀毒软件检测到时">When malware is detected by antivirus</button>
   <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz1-feedback')" data-en="When a new smartphone is released" data-cn="当新智能手机发布时">When a new smartphone is released</button>
   <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz1-feedback')" data-en="When malware changes but the classifier stays the same → model gets worse" data-cn="当恶意软件变化但分类器不变 → 模型变差">When malware changes but the classifier stays the same → model gets worse</button>
@@ -472,7 +478,13 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 
 <div class="spacer"></div>
-<div class="script"><strong>Speaker tip:</strong> <span data-en="'Think of Dream as a doctor that KNOWS your medical history. It doesn't just guess — it knows what you already know, so it can tell when something genuinely changed.'" data-cn="'可以把 Dream 想象成一个了解你病史的医生。它不是瞎猜——它知道你已经知道了什么，所以能判断是否真的发生了变化。'">"Think of Dream as a doctor that KNOWS your medical history. It doesn't just guess — it knows what you already know, so it can tell when something genuinely changed."</span></div>
+<div class="fig">
+  <img src="fig/fig3-dream-framework.png" alt="Dream framework overview">
+  <div class="fig-cap"><em>Paper Figure</em> — The complete Dream loop: model-sensitive detection on the left, concept-guided adaptation on the right.</div>
+</div>
+
+<div class="spacer"></div>
+<div class="script"><strong>Speaker tip:</strong> <span data-en="Think of Dream as a doctor that KNOWS your medical history. It doesn't just guess — it knows what you already know, so it can tell when something genuinely changed." data-cn="可以把 Dream 想象成一个了解你病史的医生。它不是瞎猜——它知道你已经知道了什么，所以能判断是否真的发生了变化。">Think of Dream as a doctor that KNOWS your medical history. It doesn't just guess — it knows what you already know, so it can tell when something genuinely changed.</span></div>
 </div>
 
 <!-- SLIDE 7 -->
@@ -480,7 +492,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="speaker-tag s2">👤 Speaker 2</div>
 <span class="slide-tag">Part 2 · Concepts</span>
 
-<div class="slide-title" data-en="What Are 'Concepts' in This Paper?" data-cn=""概念"在这篇论文里是什么？">What Are 'Concepts' in This Paper?</div>
+<div class="slide-title" data-en="What Are 'Concepts' in This Paper?" data-cn="“概念”在这篇论文里是什么？">What Are 'Concepts' in This Paper?</div>
 <div class="slide-subtitle" data-en="A concept = a type of malicious BEHAVIOR, not just a family label." data-cn="概念 = 一种恶意行为的类型，而不只是一个家族标签。">A concept = a type of malicious BEHAVIOR, not just a family label.</div>
 
 <div class="spacer"></div>
@@ -522,6 +534,12 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <h4 data-en="Why This Matters" data-cn="为什么这很重要">Why This Matters</h4>
   <p data-en="A malware family can have MULTIPLE behaviors. Two samples in the same family may behave very differently. That's why concepts are more informative than just family labels." data-cn="一个恶意软件家族可以有多重行为。同一个家族的两个样本可能行为差异很大。这就是为什么概念比家族标签更有信息量。">A malware family can have MULTIPLE behaviors. Two samples in the same family may behave very differently. That's why concepts are more informative than just family labels.</p>
 </div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="fig/fig4-concept-learning.png" alt="Concept learning in Dream">
+  <div class="fig-cap"><em>Paper visual</em> — Concepts live in the latent space, which is exactly why expert revisions can directly steer adaptation.</div>
+</div>
 </div>
 
 <!-- SLIDE 8 -->
@@ -558,7 +576,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="grid2">
   <div class="hl">
     <h4 data-en="Predictions AGREE ✓ → Low drift score" data-cn="预测一致 ✓ → Drift 分数低">Predictions AGREE ✓ → Low drift score</h4>
-    <p data-en="Good. The classifier still "gets it" even when looking at a rebuilt version. The concepts used are still reliable." data-cn="好。分类器即使看重建版本仍然"理解正确"。使用的概念仍然可靠。">Good. The classifier still "gets it" even when looking at a rebuilt version. The concepts used are still reliable.</p>
+    <p data-en="Good. The classifier still &quot;gets it&quot; even when looking at a rebuilt version. The concepts used are still reliable." data-cn="好。分类器即使看重建版本仍然‘理解正确’。使用的概念仍然可靠。">Good. The classifier still "gets it" even when looking at a rebuilt version. The concepts used are still reliable.</p>
   </div>
   <div class="hl red">
     <h4 data-en="Predictions DISAGREE ✗ → High drift score" data-cn="预测不一致 ✗ → Drift 分数高">Predictions DISAGREE ✗ → High drift score</h4>
@@ -567,7 +585,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 
 <div class="spacer"></div>
-<div class="script"><strong>Speaker tip:</strong> <span data-en="'Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects.'" data-cn="'在白板上画：x → [自编码器] → x̂ → [分类器 M] → 比较 M(x) 和 M(x̂)。问：如果它们不同意味着什么？对——检测器使用的概念和分类器预期的对不上。'">"Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects."</span></div>
+<div class="script"><strong>Speaker tip:</strong> <span data-en="Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects." data-cn="在白板上画：x → [自编码器] → x̂ → [分类器 M] → 比较 M(x) 和 M(x̂)。问：如果它们不同意味着什么？对——检测器使用的概念和分类器预期的对不上。">Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects.</span></div>
 </div>
 
 <!-- SLIDE 9 -->
@@ -585,7 +603,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
         <div class="step-num" style="background:var(--yellow)">1</div>
         <div class="step-content">
           <h4 data-en="Supervised: Align with Classifier" data-cn="监督：和分类器对齐">Supervised: Align with Classifier</h4>
-          <p data-en="Link latent directions to the classifier's activation patterns. So Dream knows what the classifier FEARS." data-cn="把隐空间方向和分类器的激活模式联系起来。这样 Dream 知道分类器在"怕"什么。">Link latent directions to the classifier's activation patterns. So Dream knows what the classifier FEARS.</p>
+          <p data-en="Link latent directions to the classifier's activation patterns. So Dream knows what the classifier FEARS." data-cn="把隐空间方向和分类器的激活模式联系起来。这样 Dream 知道分类器在‘怕’什么。">Link latent directions to the classifier's activation patterns. So Dream knows what the classifier FEARS.</p>
         </div>
       </div>
       <div class="step-item">
@@ -645,6 +663,12 @@ tr:hover td{background:rgba(96,165,250,.05)}
       <p data-en="Same accuracy with 76.6% fewer labeled samples. Far more efficient." data-cn="同样准确率，标注样本减少 76.6%。高效得多。">Same accuracy with 76.6% fewer labeled samples. Far more efficient.</p>
     </div>
   </div>
+</div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="fig/table6-fig8.png" alt="Adaptation and explanation results">
+  <div class="fig-cap"><em>Paper evidence</em> — Extra adaptation and explanation results, placed here because this slide is about why concept-level feedback beats label-only retraining.</div>
 </div>
 </div>
 
@@ -781,12 +805,18 @@ tr:hover td{background:rgba(96,165,250,.05)}
     <p data-en="Also beats HCC on intra-class drift (new variants within same family). Dream works for both types." data-cn="在家族内 drift（同一家族内新变种）上也击败了 HCC。Dream 对两种类型都有效。">Also beats HCC on intra-class drift (new variants within same family). Dream works for both types.</p>
   </div>
 </div>
-</div>
 
 <div class="spacer"></div>
 <div class="fig">
   <img src="fig/fig7-results.png" alt="Experimental Results">
   <div class="fig-cap"><em>Fig. 7</em> — Dream consistently outperforms all baselines: +11–14% AUC vs best competitor. 0.57ms detection latency (3× faster than CADE, 10× faster than Transcendent). 76.6% labeling reduction to reach same accuracy. Source: paper Table 3 & Table 5.</div>
+</div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="fig/table3-4-5.png" alt="Detailed metric tables">
+  <div class="fig-cap"><em>Paper tables</em> — Backup evidence for detector AUC, latency, and adaptation sample efficiency.</div>
+</div>
 </div>
 
 <!-- SLIDE 14 -->
@@ -806,12 +836,18 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <tr><td data-en="Fast Detection" data-cn="快速检测">Fast Detection</td><td>5.75ms</td><td>1.89ms</td><td>—</td><td><strong>0.57ms</strong></td></tr>
 </table>
 </div>
-</div>
 
 <div class="spacer"></div>
 <div class="fig">
   <img src="fig/table1-comparison.png" alt="Dream vs Baselines Comparison">
-  <div class="fig-cap"><em>Fig. 8</em> — Dream is the ONLY method achieving all four properties simultaneously: model-sensitive detection, data autonomy at test time, explanatory adaptation, and both inter-class &amp; intra-class drift handling. Source: paper Table 2.</div>
+  <div class="fig-cap"><em>Fig. 8</em> — Dream is the only method that covers model-sensitive detection, no train-data dependency at test time, explanatory adaptation, and both drift settings together.</div>
+</div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="fig/fig9-more-results.png" alt="Additional Dream results">
+  <div class="fig-cap"><em>Paper evidence</em> — More results to reinforce that Dream's gains are consistent instead of depending on one cherry-picked case.</div>
+</div>
 </div>
 
 <!-- SLIDE 15 — INTERACTIVE QUIZ 3 -->
@@ -856,7 +892,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <div class="card pop pop-delay-1">
     <div class="icon">💬</div>
     <h4 data-en="Experts Do More" data-cn="专家更重要">Experts Do More</h4>
-    <p data-en="Not just label — explain WHY. Concept-level feedback goes into the model. Every sample is far more powerful." data-cn="不只是标注——解释"为什么"。概念层面的反馈进入模型。每个样本都更有价值。">Not just label — explain WHY. Concept-level feedback goes into the model. Every sample is far more powerful.</p>
+    <p data-en="Not just label — explain WHY. Concept-level feedback goes into the model. Every sample is far more powerful." data-cn="不只是标注——解释‘为什么’。概念层面的反馈进入模型。每个样本都更有价值。">Not just label — explain WHY. Concept-level feedback goes into the model. Every sample is far more powerful.</p>
   </div>
   <div class="card pop pop-delay-2">
     <div class="icon">🚀</div>
@@ -922,12 +958,12 @@ function showSlide(i) {
   slides.forEach(s => s.classList.remove('active'));
   slides[i].classList.add('active');
   current = i;
-  numEl.textContent = current + ' / ' + (total - 1);
+  numEl.textContent = (current + 1) + ' / ' + total;
   bar.style.width = ((current / (total - 1)) * 100) + '%';
   window.scrollTo(0, 0);
   applyLang();
   document.querySelectorAll('#topbar .nav button').forEach((b, idx) => {
-    b.classList.toggle('active', (idx === 0 && current < 5) || (idx === 1 && current >= 5 && current < 12) || (idx === 2 && current >= 12 && current < 17) || (idx === 3 && current >= 17));
+    b.classList.toggle('active', (idx === 0 && current < 6) || (idx === 1 && current >= 6 && current < 12) || (idx === 2 && current >= 12 && current < 17) || (idx === 3 && current >= 17));
   });
 }
 

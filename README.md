@@ -19,7 +19,11 @@ Use the **CN / EN** button in the top-right corner to switch between Chinese and
 ## Project Structure
 ```
 dream-ccs25-presentation/
-├── index.html   ← main presentation (single page)
-├── styles.css   ← slide styling
+├── index.html   ← main presentation (single page, inline CSS + JS)
+├── fig/         ← paper screenshots / extracted figures used in slides
 └── README.md    ← this file
 ```
+
+## Notes
+- This deck is driven by a single `index.html` file.
+- Most visuals are screenshots/extractions from the paper so the online demo stays close to the publication.
