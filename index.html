@@ -24,10 +24,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);
 #topbar .nav button:hover{background:var(--accent);color:#fff;}
 #topbar .nav button.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 #topbar .right{display:flex;align-items:center;gap:8px;}
-#topbar .lang-btn{background:var(--card);border:1px solid rgba(255,255,255,.12);
-  color:var(--accent);font-size:13px;padding:6px 16px;border-radius:8px;
+#topbar .lang-btn,#topbar .icon-btn,#topbar .slide-jump{background:var(--card);border:1px solid rgba(255,255,255,.12);
+  color:var(--accent);font-size:13px;padding:6px 12px;border-radius:8px;
   cursor:pointer;font-weight:600;transition:all .2s;}
-#topbar .lang-btn:hover{background:var(--accent);color:#fff;}
+#topbar .lang-btn:hover,#topbar .icon-btn:hover,#topbar .slide-jump:hover{background:var(--accent);color:#fff;}
+#topbar .slide-jump{max-width:190px;color:var(--muted);padding-right:30px}
+#topbar .slide-jump option{color:#111827}
 #progress-bar{position:fixed;top:52px;left:0;height:3px;background:var(--accent);
   z-index:200;transition:width .3s;}
 #slides{position:fixed;top:52px;left:0;right:0;bottom:60px;overflow-y:auto;
@@ -205,6 +207,33 @@ tr:hover td{background:rgba(96,165,250,.05)}
 .interlude p{font-size:15px;color:var(--muted);margin-bottom:16px}
 .interlude button{background:var(--accent);color:#fff;border:none;
   padding:10px 28px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}
+.hint-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.hint-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--muted);
+  font-size:12px;padding:8px 12px;border-radius:999px}
+
+@media (max-width: 980px){
+  #topbar{height:auto;min-height:52px;flex-wrap:wrap;gap:10px;padding:10px 14px}
+  #topbar .nav{order:3;width:100%;overflow-x:auto;padding-bottom:2px}
+  #topbar .right{width:100%;justify-content:space-between;flex-wrap:wrap}
+  #progress-bar{top:92px}
+  #slides{top:95px;bottom:74px}
+  .slide{padding:24px 18px 36px}
+  .slide-title{font-size:28px}
+  .slide-subtitle{font-size:16px}
+  .grid2,.grid3,.grid-4,.triad,.split{grid-template-columns:1fr}
+  .banner .val{font-size:22px}
+  .timer{position:static;transform:none}
+  .slide-jump{max-width:48vw}
+}
+
+@media (max-width: 640px){
+  #topbar .title{font-size:12px}
+  #topbar .nav button,#topbar .lang-btn,#topbar .icon-btn,#topbar .slide-jump{font-size:12px;padding:6px 10px}
+  .fig img{max-height:260px}
+  .next-btn,.prev-btn{bottom:12px}
+  .prev-btn{right:64px}
+  .slide-num{left:14px;bottom:18px}
+}
 </style>
 </head>
 <body>
@@ -225,6 +254,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
         <button onclick="resetTimer()">↺</button>
       </span>
     </div>
+    <select class="slide-jump" id="slideJump" onchange="jumpToSlide(this.value)"></select>
+    <button class="icon-btn" onclick="toggleFullscreen()">⛶</button>
     <button class="lang-btn" onclick="toggleLang()">CN / EN</button>
   </div>
 </div>
@@ -242,6 +273,11 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <p>CCS 2025 · Android Malware Classification · Interactive Presentation</p>
   <p style="font-size:13px;color:var(--accent)">浙江大学 · 区块链与数据安全国家重点实验室</p>
   <button onclick="nextSlide()" style="margin-top:8px">▶ 开始演讲</button>
+  <div class="hint-row">
+    <span class="hint-chip">← → / Space 切页</span>
+    <span class="hint-chip">CN / EN 一键切换双语</span>
+    <span class="hint-chip">⛶ 全屏展示更适合答辩</span>
+  </div>
 </div>
 <div class="spacer"></div>
 <div class="grid3">
@@ -952,15 +988,34 @@ const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 const numEl = document.getElementById('slideNum');
 const bar = document.getElementById('progress-bar');
+const slideJump = document.getElementById('slideJump');
+let touchStartX = null;
 
-function showSlide(i) {
+function getSlideLabel(index) {
+  const titleEl = slides[index].querySelector('.slide-title, h3');
+  return titleEl ? titleEl.textContent.trim() : `Slide ${index + 1}`;
+}
+
+function populateSlideJump() {
+  slideJump.innerHTML = '';
+  slides.forEach((_, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${i + 1}. ${getSlideLabel(i)}`;
+    slideJump.appendChild(opt);
+  });
+}
+
+function showSlide(i, syncHash = true) {
   i = Math.max(0, Math.min(total - 1, i));
   slides.forEach(s => s.classList.remove('active'));
   slides[i].classList.add('active');
   current = i;
   numEl.textContent = (current + 1) + ' / ' + total;
   bar.style.width = ((current / (total - 1)) * 100) + '%';
-  window.scrollTo(0, 0);
+  slideJump.value = String(current);
+  document.getElementById('slides').scrollTo({ top: 0, behavior: 'smooth' });
+  if (syncHash) history.replaceState(null, '', `#s${current}`);
   applyLang();
   document.querySelectorAll('#topbar .nav button').forEach((b, idx) => {
     b.classList.toggle('active', (idx === 0 && current < 6) || (idx === 1 && current >= 6 && current < 12) || (idx === 2 && current >= 12 && current < 17) || (idx === 3 && current >= 17));
@@ -969,10 +1024,16 @@ function showSlide(i) {
 
 function nextSlide() { showSlide(current + 1); }
 function prevSlide() { showSlide(current - 1); }
+function jumpToSlide(i) { showSlide(Number(i)); }
 
 function goPart(p) {
-  const map = {1:0, 2:5, 3:12, 4:17};
+  const map = {1:0, 2:6, 3:12, 4:17};
   showSlide(map[p] || 0);
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
 }
 
 // ── LANGUAGE TOGGLE ──
@@ -980,6 +1041,8 @@ let lang = 'en';
 function toggleLang() {
   lang = lang === 'en' ? 'cn' : 'en';
   applyLang();
+  populateSlideJump();
+  slideJump.value = String(current);
 }
 function applyLang() {
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -987,12 +1050,29 @@ function applyLang() {
     if (!el.hasAttribute(key)) return;
     el.textContent = el.getAttribute(key);
   });
+  document.querySelector('.lang-btn').textContent = lang === 'en' ? 'CN / EN' : 'EN / 中文';
 }
 
-// ── KEYBOARD NAV ──
+// ── KEYBOARD / TOUCH NAV ──
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
+  if (e.key.toLowerCase() === 'f') toggleFullscreen();
+});
+
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (touchStartX == null) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 60) dx < 0 ? nextSlide() : prevSlide();
+  touchStartX = null;
+}, { passive: true });
+
+window.addEventListener('hashchange', () => {
+  const m = location.hash.match(/^#s(\d+)$/);
+  if (m) showSlide(Number(m[1]), false);
 });
 
 // ── QUIZ ──
@@ -1000,6 +1080,9 @@ function checkQuiz(btn, type, feedbackId) {
   const feedback = document.getElementById(feedbackId);
   const allBtns = btn.parentElement.querySelectorAll('.quiz-option');
   allBtns.forEach(b => b.disabled = true);
+  allBtns.forEach(b => {
+    if ((b.getAttribute('onclick') || '').includes("'correct'")) b.classList.add('correct');
+  });
   if (type === 'correct') {
     btn.classList.add('correct');
     feedback.className = 'quiz-feedback show correct';
@@ -1007,12 +1090,7 @@ function checkQuiz(btn, type, feedbackId) {
   } else {
     btn.classList.add('wrong');
     feedback.className = 'quiz-feedback show wrong';
-    feedback.textContent = lang === 'en' ? '❌ Try again next time!' : '❌ 下次再试试！';
-    allBtns.forEach(b => {
-      if (!b.classList.contains('wrong') && !b.classList.contains('correct')) {
-        // find correct option and highlight it
-      }
-    });
+    feedback.textContent = lang === 'en' ? '❌ Not this one — the correct answer is now highlighted.' : '❌ 不是这个，正确答案已经高亮了。';
   }
 }
 
@@ -1039,7 +1117,9 @@ function resetTimer() {
   document.getElementById('timerDisplay').textContent = '00:00';
 }
 
-showSlide(0);
+populateSlideJump();
+const initialHash = location.hash.match(/^#s(\d+)$/);
+showSlide(initialHash ? Number(initialHash[1]) : 0, false);
 </script>
 </body>
 </html>

@@ -11,6 +11,13 @@ Open `index.html` in a browser to view the presentation.
 ## Language Toggle
 Use the **CN / EN** button in the top-right corner to switch between Chinese and English.
 
+## Extra Controls
+- **Slide jump dropdown** — jump straight to any slide
+- **Fullscreen button** — better for live presentation
+- **Keyboard** — `← / → / Space` to move slides, `F` for fullscreen
+- **Mobile swipe** — swipe left/right to change slides
+- **URL hash** — direct slide links like `#s12`
+
 ## Speaker Sections
 - **Part 1** — Problem & Background (Speaker 1)
 - **Part 2** — Dream System & Detection (Speaker 2)
