@@ -131,6 +131,10 @@ tr:hover td{background:rgba(96,165,250,.05)}
 .quiz-feedback.show{display:block}
 .quiz-feedback.correct{background:rgba(52,211,153,.15);color:var(--green)}
 .quiz-feedback.wrong{background:rgba(248,113,113,.15);color:var(--red)}
+.mini-score{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px;justify-content:center}
+.mini-score .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:999px;font-size:12px;color:var(--muted)}
+.mini-score .chip strong{color:#fff}
+.mini-game-toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 
 /* CLICK TO REVEAL */
 .reveal-card{background:var(--card);border-radius:14px;padding:18px 22px;
@@ -407,8 +411,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: a simple paper figure or crop showing intra-class vs inter-class drift examples.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Add your own screenshot for the two drift types when you are ready.</div>
+  <img src="assets/web/paper-fig1-active-learning.png" alt="Paper figure related to concept drift mitigation pipeline">
+  <div class="fig-cap"><em>Paper figure</em> — Real figure from the paper to anchor the drift discussion in a concrete mitigation pipeline.</div>
 </div>
 </div>
 
@@ -721,6 +725,12 @@ if drift_score &gt; tau:
 <div class="slide-title" data-en="Mini Game — Drift or Not?" data-cn="小游戏——发生 drift 了吗？">Mini Game — Drift or Not?</div>
 <div class="slide-subtitle" data-en="Let the audience vote together before you reveal Dream's logic." data-cn="让大家先一起猜，再揭晓 Dream 的判断逻辑。">Let the audience vote together before you reveal Dream's logic.</div>
 
+<div class="mini-score" id="miniScoreBoard">
+  <div class="chip"><strong data-en="Local votes" data-cn="本机点击数">Local votes</strong>: <span id="voteCount">0</span></div>
+  <div class="chip"><strong data-en="Correct picks" data-cn="答对次数">Correct picks</strong>: <span id="correctCount">0</span></div>
+  <div class="chip"><strong data-en="Sync status" data-cn="同步状态">Sync status</strong>: <span data-en="local only" data-cn="仅本地">local only</span></div>
+</div>
+
 <div class="quiz-q">
   <h4 data-en="Case A: The classifier gives almost the same prediction on x and x̂. What should Dream think?" data-cn="情景 A：分类器对 x 和 x̂ 的预测几乎一样。Dream 应该怎么判断？">Case A: The classifier gives almost the same prediction on x and x̂. What should Dream think?</h4>
   <button class="quiz-option" onclick="checkQuiz(this, 'correct', 'game1')" data-en="Low drift risk — the learned concepts still match the classifier." data-cn="低 drift 风险——学到的 concept 仍然和分类器对得上。">Low drift risk — the learned concepts still match the classifier.</button>
@@ -740,6 +750,11 @@ if drift_score &gt; tau:
 <div class="hl orange">
   <h4 data-en="How to play it live" data-cn="现场怎么玩">How to play it live</h4>
   <p data-en="Ask the room to raise hands or shout A/B/C first. Then click the answer. This usually wakes people up and helps them remember Dream's core idea: classifier disagreement is the signal." data-cn="可以先让全场举手或者喊 A/B/C，再点答案。这个小互动很容易把大家拉回来，也更容易记住 Dream 的核心：关键看分类器前后是不是改主意。">Ask the room to raise hands or shout A/B/C first. Then click the answer. This usually wakes people up and helps them remember Dream's core idea: classifier disagreement is the signal.</p>
+</div>
+
+<div class="mini-game-toolbar">
+  <button class="ghost-btn" onclick="resetMiniGame()" data-en="Reset game" data-cn="重置小游戏">Reset game</button>
+  <button class="ghost-btn" onclick="showMiniGameNotice()" data-en="About sync" data-cn="关于同步">About sync</button>
 </div>
 </div>
 
@@ -936,8 +951,8 @@ if drift_score &gt; tau:
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: dataset overview or table showing Drebin, Malradar, and Extended.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Dataset-overview figure slot.</div>
+  <img src="assets/web/paper-fig4-human-loop.png" alt="Public paper figure for Dream human-in-the-loop setting">
+  <div class="fig-cap"><em>Paper figure</em> — A real public figure that keeps the setup section visually grounded while discussing analyst feedback and dataset usage.</div>
 </div>
 
 <div class="spacer"></div>
@@ -1006,14 +1021,14 @@ if drift_score &gt; tau:
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the main results figure with AUC, latency, or labeling-efficiency gains.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Main-results figure slot.</div>
+  <img src="assets/web/paper-roc-dream-drebin.png" alt="Public Dream ROC curve on Drebin">
+  <div class="fig-cap"><em>Paper curve</em> — One concrete ROC result you can point to while explaining detection quality.</div>
 </div>
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: backup result tables for AUC, latency, and sample efficiency.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Backup-table slot.</div>
+  <img src="assets/web/paper-roc-dream-mamadroid.png" alt="Public Dream ROC curve on Mamadroid">
+  <div class="fig-cap"><em>Paper curve</em> — Another real result curve that helps show Dream is not winning in only one classifier setting.</div>
 </div>
 
 <div class="code-card">
@@ -1063,8 +1078,8 @@ if drift_score &gt; tau:
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: comparison table showing Dream vs baseline capabilities.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Comparison-table slot.</div>
+  <img src="assets/web/paper-roc-dream-damd.png" alt="Public Dream ROC curve on Damd">
+  <div class="fig-cap"><em>Paper curve</em> — Real ROC evidence for the third classifier family, backing up the comparison slide.</div>
 </div>
 
 <div class="spacer"></div>
@@ -1365,6 +1380,37 @@ function clearAllUploadedFigures() {
   updateUploadTexts();
 }
 
+// ── MINI GAME (LOCAL ONLY) ──
+let miniVotes = 0;
+let miniCorrect = 0;
+
+function updateMiniScore() {
+  const voteEl = document.getElementById('voteCount');
+  const correctEl = document.getElementById('correctCount');
+  if (voteEl) voteEl.textContent = String(miniVotes);
+  if (correctEl) correctEl.textContent = String(miniCorrect);
+}
+
+function resetMiniGame() {
+  miniVotes = 0;
+  miniCorrect = 0;
+  document.querySelectorAll('#s8game .quiz-option').forEach(btn => {
+    btn.disabled = false;
+    btn.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('#s8game .quiz-feedback').forEach(fb => {
+    fb.className = 'quiz-feedback';
+    fb.textContent = '';
+  });
+  updateMiniScore();
+}
+
+function showMiniGameNotice() {
+  alert(lang === 'en'
+    ? 'This mini game is interactive, but the vote count is local to this browser only. A real shared tally would need a backend service.'
+    : '这个小游戏可以互动，但计数只保存在当前浏览器里。真要全员同步统计，需要接后端服务。');
+}
+
 // ── KEYBOARD / TOUCH NAV ──
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
@@ -1395,15 +1441,18 @@ function checkQuiz(btn, type, feedbackId) {
   allBtns.forEach(b => {
     if ((b.getAttribute('onclick') || '').includes("'correct'")) b.classList.add('correct');
   });
+  miniVotes++;
   if (type === 'correct') {
     btn.classList.add('correct');
     feedback.className = 'quiz-feedback show correct';
     feedback.textContent = lang === 'en' ? '✅ Correct!' : '✅ 正确！';
+    miniCorrect++;
   } else {
     btn.classList.add('wrong');
     feedback.className = 'quiz-feedback show wrong';
     feedback.textContent = lang === 'en' ? '❌ Not this one — the correct answer is now highlighted.' : '❌ 不是这个，正确答案已经高亮了。';
   }
+  updateMiniScore();
 }
 
 // ── SPEAKER TIMER ──
@@ -1431,6 +1480,7 @@ function resetTimer() {
 
 populateSlideJump();
 setupUploadFigures();
+updateMiniScore();
 const initialHash = location.hash.match(/^#s(\d+)$/);
 showSlide(initialHash ? Number(initialHash[1]) : 0, false);
 </script>
