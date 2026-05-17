@@ -170,6 +170,9 @@ tr:hover td{background:rgba(96,165,250,.05)}
 /* FIGURES */
 .fig{display:block;text-align:center;margin:16px 0}
 .fig img{max-width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.08);max-height:320px;object-fit:contain;background:rgba(255,255,255,.02)}
+.fig-placeholder{display:flex;align-items:center;justify-content:center;min-height:180px;padding:20px;border-radius:12px;border:2px dashed rgba(96,165,250,.35);background:rgba(96,165,250,.06);color:var(--muted);text-align:center}
+.fig-placeholder strong{display:block;color:var(--accent);font-size:14px;margin-bottom:6px}
+.fig-placeholder span{font-size:12px;line-height:1.6;max-width:520px}
 .fig-cap{font-size:12px;color:var(--muted);margin-top:5px;font-style:italic}
 .fig-cap em{color:var(--accent);font-style:normal}
 
@@ -382,8 +385,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig2-two-types.png" alt="Inter-class vs intra-class drift illustrations">
-  <div class="fig-cap"><em>Paper visual</em> — Concrete examples of intra-class and inter-class drift, which makes the transition into Dream's target setting much clearer.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: a simple paper figure or crop showing intra-class vs inter-class drift examples.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Add your own screenshot for the two drift types when you are ready.</div>
 </div>
 </div>
 
@@ -415,15 +418,15 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig1-active-learning.png" alt="Traditional Active Learning Framework">
-  <div class="fig-cap"><em>Fig. 2</em> — Traditional two-step active learning: drift detection → expert labeling → retrain. The paper identifies two key limitations in this loop. Source: paper Figure 2.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the traditional two-step active-learning pipeline from the paper.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Traditional pipeline figure slot.</div>
 </div>
 
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig3-dream-framework.png" alt="Dream Framework">
-  <div class="fig-cap"><em>Fig. 3</em> — Dream's two-stage loop: (left) Detection uses autoencoder + classifier comparison with no training data needed; (right) Adaptation uses expert concept revisions + joint update. Source: paper Figure 3.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: Dream framework overview with detection on the left and adaptation on the right.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Dream framework figure slot.</div>
 </div>
 
 <div class="spacer"></div>
@@ -521,8 +524,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig3-dream-framework.png" alt="Dream framework overview">
-  <div class="fig-cap"><em>Paper Figure</em> — The complete Dream loop: model-sensitive detection on the left, concept-guided adaptation on the right.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the full Dream loop used while introducing the framework.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Dream loop figure slot.</div>
 </div>
 
 <div class="spacer"></div>
@@ -579,8 +582,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig4-concept-learning.png" alt="Concept learning in Dream">
-  <div class="fig-cap"><em>Paper visual</em> — Concepts live in the latent space, which is exactly why expert revisions can directly steer adaptation.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: concept-space or latent-space figure showing how behaviors are organized.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Concept-space figure slot.</div>
 </div>
 </div>
 
@@ -609,8 +612,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig5-detection-trick.png" alt="Detection Trick Detail">
-  <div class="fig-cap"><em>Fig. 4</em> — Dream's detection: rebuild sample via autoencoder → compare classifier predictions M(x) vs M(x̂). Divergence = concept drift. No reference data needed at test time. Source: paper Figure 4.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the detection trick showing reconstruction plus comparison between M(x) and M(x̂).</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Detection-trick figure slot.</div>
 </div>
 
 <div class="spacer"></div>
@@ -661,8 +664,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
     <h3 data-en="The Full Objective" data-cn="完整目标函数">The Full Objective</h3>
     <div class="eq">L = λ₀L_rec + λ₁L_sep + λ₂L_pre + λ₃L_rel</div>
     <div class="fig" style="margin-top:12px">
-      <img src="fig/fig4-concept-learning.png" alt="Dream Training Objective">
-      <div class="fig-cap"><em>Fig. 5</em> — Dream's four-term loss: reconstruction (L_rec), concept separation (L_sep), concept presence (L_pre), and classifier agreement on rebuilt samples (L_rel). L_rel is the key innovation making detection model-sensitive. Source: paper Equation (1).</div>
+      <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the training objective / four-term loss equation figure.</span></div></div>
+      <div class="fig-cap"><em>Placeholder</em> — Training-objective figure slot.</div>
     </div>
     <ul>
       <li><strong>L_rec</strong>: <span data-en="reconstruction quality" data-cn="重建质量">reconstruction quality</span></li>
@@ -709,8 +712,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/table6-fig8.png" alt="Adaptation and explanation results">
-  <div class="fig-cap"><em>Paper evidence</em> — Extra adaptation and explanation results, placed here because this slide is about why concept-level feedback beats label-only retraining.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: any adaptation/explanation result that supports concept-level feedback.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Adaptation-result figure slot.</div>
 </div>
 </div>
 
@@ -778,8 +781,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig6-datasets.png" alt="Dataset Overview">
-  <div class="fig-cap"><em>Fig. 6</em> — Dataset overview: Drebin (3,317 samples, 8 families, 2010–2012), Malradar (2,589 samples, 8 families, 2015–2021), Extended (4,410 samples, 180 families, 2015–2020). Hold-out by family simulates brand new family appearance. Source: paper Table 1.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: dataset overview or table showing Drebin, Malradar, and Extended.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Dataset-overview figure slot.</div>
 </div>
 
 <div class="spacer"></div>
@@ -823,14 +826,14 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig7-results.png" alt="Experimental Results">
-  <div class="fig-cap"><em>Fig. 7</em> — Dream consistently outperforms all baselines: +11–14% AUC vs best competitor. 0.57ms detection latency (3× faster than CADE, 10× faster than Transcendent). 76.6% labeling reduction to reach same accuracy. Source: paper Table 3 & Table 5.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the main results figure with AUC, latency, or labeling-efficiency gains.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Main-results figure slot.</div>
 </div>
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/table3-4-5.png" alt="Detailed metric tables">
-  <div class="fig-cap"><em>Paper tables</em> — Backup evidence for detector AUC, latency, and adaptation sample efficiency.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: backup result tables for AUC, latency, and sample efficiency.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Backup-table slot.</div>
 </div>
 </div>
 
@@ -854,14 +857,14 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/table1-comparison.png" alt="Dream vs Baselines Comparison">
-  <div class="fig-cap"><em>Fig. 8</em> — Dream is the only method that covers model-sensitive detection, no train-data dependency at test time, explanatory adaptation, and both drift settings together.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: comparison table showing Dream vs baseline capabilities.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Comparison-table slot.</div>
 </div>
 
 <div class="spacer"></div>
 <div class="fig">
-  <img src="fig/fig9-more-results.png" alt="Additional Dream results">
-  <div class="fig-cap"><em>Paper evidence</em> — More results to reinforce that Dream's gains are consistent instead of depending on one cherry-picked case.</div>
+  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: any extra supporting result you want for backup or Q&A.</span></div></div>
+  <div class="fig-cap"><em>Placeholder</em> — Extra-result figure slot.</div>
 </div>
 </div>
 
