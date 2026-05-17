@@ -176,6 +176,27 @@ tr:hover td{background:rgba(96,165,250,.05)}
 .fig-cap{font-size:12px;color:var(--muted);margin-top:5px;font-style:italic}
 .fig-cap em{color:var(--accent);font-style:normal}
 
+.upload-figure{flex-direction:column;gap:14px;align-items:stretch;text-align:left}
+.upload-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:140px;text-align:center}
+.upload-preview{display:none;width:100%;max-height:340px;object-fit:contain;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.upload-preview.has-image{display:block}
+.upload-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.upload-btn,.ghost-btn{border:none;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.upload-btn{background:var(--accent);color:#fff}
+.upload-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.ghost-btn{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+.ghost-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.upload-note{font-size:11px;color:var(--muted);text-align:center}
+
+.code-card{background:#0b1220;border:1px solid rgba(96,165,250,.18);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.16);margin:14px 0}
+.code-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(96,165,250,.08);border-bottom:1px solid rgba(96,165,250,.14)}
+.code-lang{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+.code-purpose{font-size:11px;color:var(--muted)}
+.code-card pre{margin:0;padding:14px 16px;overflow:auto}
+.code-card code{font-family:'Courier New',monospace;font-size:12px;line-height:1.7;color:#dbeafe;white-space:pre}
+.code-callout{font-size:12px;color:var(--muted);padding:0 16px 14px;line-height:1.6}
+.code-callout strong{color:var(--yellow)}
+
 /* SPEAKER SCRIPT */
 .script{background:rgba(129,140,248,.06);border-left:3px solid var(--accent2);
   border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-size:13px;
@@ -258,6 +279,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
       </span>
     </div>
     <select class="slide-jump" id="slideJump" onchange="jumpToSlide(this.value)"></select>
+    <button class="icon-btn" onclick="clearAllUploadedFigures()">🗑</button>
     <button class="icon-btn" onclick="toggleFullscreen()">⛶</button>
     <button class="lang-btn" onclick="toggleLang()">CN / EN</button>
   </div>
@@ -420,6 +442,19 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the traditional two-step active-learning pipeline from the paper.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Traditional pipeline figure slot.</div>
+</div>
+
+<div class="code-card">
+  <div class="code-head">
+    <span class="code-lang">pipeline sketch</span>
+    <span class="code-purpose" data-en="what traditional systems actually do" data-cn="传统系统实际上在做什么">what traditional systems actually do</span>
+  </div>
+  <pre><code>new_samples
+  → drift_detector()
+  → suspicious_subset
+  → expert_label()
+  → retrain_classifier()</code></pre>
+  <div class="code-callout" data-en="Problem: the detector can be misaligned, and the expert's reasoning disappears after labeling." data-cn="问题：检测器可能和分类器脱节，而且专家的推理在标完标签后就消失了。"><strong>Problem:</strong> the detector can be misaligned, and the expert's reasoning disappears after labeling.</div>
 </div>
 
 
@@ -647,6 +682,20 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <div class="fig-cap"><em>Placeholder</em> — Detection-trick figure slot.</div>
 </div>
 
+<div class="code-card">
+  <div class="code-head">
+    <span class="code-lang">pseudo code</span>
+    <span class="code-purpose" data-en="Dream drift scoring" data-cn="Dream 的 drift 打分">Dream drift scoring</span>
+  </div>
+  <pre><code>x_hat = autoencoder(x)
+y1 = classifier(x)
+y2 = classifier(x_hat)
+drift_score = distance(y1, y2)
+if drift_score &gt; tau:
+    alert_expert(x)</code></pre>
+  <div class="code-callout" data-en="Why it matters: Dream compares the classifier with itself, instead of comparing the sample with the training set." data-cn="重点：Dream 比较的是分类器前后是否改主意，而不是样本和训练集是否离得远。"><strong>Why it matters:</strong> Dream compares the classifier with itself, instead of comparing the sample with the training set.</div>
+</div>
+
 <div class="spacer"></div>
 
 <div class="grid2">
@@ -707,6 +756,17 @@ tr:hover td{background:rgba(96,165,250,.05)}
     <div class="hl" style="margin-top:12px">
       <p data-en="Key: L_rel is what makes Dream MODEL-SENSITIVE — it optimizes for classifier agreement, not an independent distance." data-cn="关键：L_rel 让 Dream 感知分类器——它优化的是分类器一致性，而不是某个独立的距离指标。">Key: L_rel is what makes Dream MODEL-SENSITIVE — it optimizes for classifier agreement, not an independent distance.</p>
     </div>
+    <div class="code-card">
+      <div class="code-head">
+        <span class="code-lang">loss design</span>
+        <span class="code-purpose" data-en="four signals in one objective" data-cn="四个目标一起学">four signals in one objective</span>
+      </div>
+      <pre><code>L_total = λ0 * L_rec   # rebuild input
+        + λ1 * L_sep   # separate concepts
+        + λ2 * L_pre   # predict concept presence
+        + λ3 * L_rel   # preserve classifier decision</code></pre>
+      <div class="code-callout" data-en="Most important term: L_rel keeps the learned concept space tied to the real classifier." data-cn="最关键的一项：L_rel 把 concept space 和真实分类器绑在一起。"><strong>Most important term:</strong> L_rel keeps the learned concept space tied to the real classifier.</div>
+    </div>
   </div>
 </div>
 </div>
@@ -745,6 +805,19 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: any adaptation/explanation result that supports concept-level feedback.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Adaptation-result figure slot.</div>
+</div>
+
+<div class="code-card">
+  <div class="code-head">
+    <span class="code-lang">update loop</span>
+    <span class="code-purpose" data-en="how expert feedback is reused" data-cn="专家反馈如何被复用">how expert feedback is reused</span>
+  </div>
+  <pre><code>for sample in alerted_samples:
+    family_label = expert.label(sample)
+    concept_fix  = expert.revise_concepts(sample)
+    update_classifier(sample, family_label)
+    update_detector(sample, concept_fix)</code></pre>
+  <div class="code-callout" data-en="Difference from old methods: the expert gives both the answer and the explanation." data-cn="和传统方法的区别：专家给的不只是答案，还有解释。"><strong>Difference from old methods:</strong> the expert gives both the answer and the explanation.</div>
 </div>
 </div>
 
@@ -865,6 +938,20 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: backup result tables for AUC, latency, and sample efficiency.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Backup-table slot.</div>
+</div>
+
+<div class="code-card">
+  <div class="code-head">
+    <span class="code-lang">result snapshot</span>
+    <span class="code-purpose" data-en="numbers you can point to while speaking" data-cn="讲解时能直接指给老师看的数字">numbers you can point to while speaking</span>
+  </div>
+  <pre><code>Dream = {
+  "labels_for_90pct_acc": 19,
+  "best_baseline": 84,
+  "auc_gain": "+11% ~ +14%",
+  "latency_ms": 0.57
+}</code></pre>
+  <div class="code-callout" data-en="Presentation tip: this code-style box makes the result slide feel more alive, even before you upload the real screenshots." data-cn="演示建议：在你还没上传真实截图前，这种代码风格框也能让结果页更有活感。"><strong>Presentation tip:</strong> this code-style box makes the result slide feel more alive, even before you upload the real screenshots.</div>
 </div>
 </div>
 
@@ -1009,12 +1096,14 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <script>
 // ── SLIDE NAVIGATION ──
 let current = 0;
+let lang = 'en';
 const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 const numEl = document.getElementById('slideNum');
 const bar = document.getElementById('progress-bar');
 const slideJump = document.getElementById('slideJump');
 let touchStartX = null;
+const uploadStoragePrefix = 'dream-upload:';
 
 function getSlideLabel(index) {
   const titleEl = slides[index].querySelector('.slide-title, h3');
@@ -1062,7 +1151,6 @@ function toggleFullscreen() {
 }
 
 // ── LANGUAGE TOGGLE ──
-let lang = 'en';
 function toggleLang() {
   lang = lang === 'en' ? 'cn' : 'en';
   applyLang();
@@ -1076,6 +1164,88 @@ function applyLang() {
     el.textContent = el.getAttribute(key);
   });
   document.querySelector('.lang-btn').textContent = lang === 'en' ? 'CN / EN' : 'EN / 中文';
+  updateUploadTexts();
+}
+
+// ── LOCAL IMAGE UPLOAD FOR STATIC PAGE ──
+function renderUploadFigure(box, savedImage) {
+  const suggestion = box.dataset.suggestion || '';
+  box.innerHTML = `
+    <div class="upload-empty" ${savedImage ? 'style="display:none"' : ''}>
+      <strong>${lang === 'en' ? 'Click to add your paper screenshot' : '点击加入你的论文截图'}</strong>
+      <span>${suggestion}</span>
+    </div>
+    <img class="upload-preview ${savedImage ? 'has-image' : ''}" ${savedImage ? `src="${savedImage}"` : ''} alt="uploaded screenshot preview">
+    <div class="upload-actions">
+      <button class="upload-btn" type="button">${lang === 'en' ? 'Upload screenshot' : '上传截图'}</button>
+      <button class="ghost-btn reset-btn" type="button">${lang === 'en' ? 'Reset slot' : '清空该图'}</button>
+      <input type="file" accept="image/*" style="display:none">
+    </div>
+    <div class="upload-note">${lang === 'en' ? 'Static page mode: the image is stored only in this browser via localStorage.' : '静态页面模式：图片只会保存在当前浏览器 localStorage 里。'}</div>
+  `;
+
+  const input = box.querySelector('input[type="file"]');
+  const uploadBtn = box.querySelector('.upload-btn');
+  const resetBtn = box.querySelector('.reset-btn');
+  const preview = box.querySelector('.upload-preview');
+  const empty = box.querySelector('.upload-empty');
+  const storageKey = uploadStoragePrefix + box.dataset.figureId;
+
+  uploadBtn.addEventListener('click', () => input.click());
+  input.addEventListener('change', async e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const dataUrl = await fileToDataUrl(file);
+    localStorage.setItem(storageKey, dataUrl);
+    preview.src = dataUrl;
+    preview.classList.add('has-image');
+    empty.style.display = 'none';
+  });
+  resetBtn.addEventListener('click', () => {
+    localStorage.removeItem(storageKey);
+    preview.removeAttribute('src');
+    preview.classList.remove('has-image');
+    empty.style.display = 'flex';
+  });
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function setupUploadFigures() {
+  document.querySelectorAll('.fig-placeholder').forEach((box, idx) => {
+    if (box.dataset.enhanced === '1') return;
+    const slideId = box.closest('.slide')?.id || 'global';
+    const hintText = box.querySelector('span')?.textContent?.trim() || '';
+    box.dataset.figureId = `${slideId}-${idx}`;
+    box.dataset.suggestion = hintText;
+    box.dataset.enhanced = '1';
+    box.classList.add('upload-figure');
+    const saved = localStorage.getItem(uploadStoragePrefix + box.dataset.figureId);
+    renderUploadFigure(box, saved);
+  });
+}
+
+function updateUploadTexts() {
+  document.querySelectorAll('.fig-placeholder.upload-figure').forEach(box => {
+    const storageKey = uploadStoragePrefix + box.dataset.figureId;
+    const saved = localStorage.getItem(storageKey);
+    renderUploadFigure(box, saved);
+  });
+}
+
+function clearAllUploadedFigures() {
+  if (!confirm(lang === 'en' ? 'Clear all locally stored screenshots in this browser?' : '清空当前浏览器里保存的所有本地截图？')) return;
+  Object.keys(localStorage)
+    .filter(key => key.startsWith(uploadStoragePrefix))
+    .forEach(key => localStorage.removeItem(key));
+  updateUploadTexts();
 }
 
 // ── KEYBOARD / TOUCH NAV ──
@@ -1143,6 +1313,7 @@ function resetTimer() {
 }
 
 populateSlideJump();
+setupUploadFigures();
 const initialHash = location.hash.match(/^#s(\d+)$/);
 showSlide(initialHash ? Number(initialHash[1]) : 0, false);
 </script>
