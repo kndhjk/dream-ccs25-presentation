@@ -885,6 +885,27 @@ if drift_score &gt; tau:
 
 <div class="spacer"></div>
 <div class="fig">
+  <img src="assets/generated/dream-setup-visual.png" alt="Generated experiment setup visual for Dream presentation">
+  <div class="fig-cap"><em>Generated visual</em> — A quick mental picture of the datasets, classifiers, and evaluation setting.</div>
+</div>
+
+<div class="grid3">
+  <div class="hl">
+    <h4 data-en="Why three datasets matter" data-cn="为什么要三套数据集">Why three datasets matter</h4>
+    <p data-en="They cover different years, family scales, and feature representations. So Dream is not tested in only one narrow setting." data-cn="三套数据集覆盖了不同年份、不同家族规模和不同特征表示，所以 Dream 不是只在一个很窄的设定里有效。">They cover different years, family scales, and feature representations. So Dream is not tested in only one narrow setting.</p>
+  </div>
+  <div class="hl yellow">
+    <h4 data-en="Why three classifiers matter" data-cn="为什么要三种分类器">Why three classifiers matter</h4>
+    <p data-en="Dream is evaluated on feature-based, API-based, and sequence-based models. That makes the evidence stronger for deployment." data-cn="Dream 同时在特征型、API 型和序列型分类器上测试，这让它更像一个可以落地的方法，而不是只适配某一个模型。">Dream is evaluated on feature-based, API-based, and sequence-based models. That makes the evidence stronger for deployment.</p>
+  </div>
+  <div class="hl orange">
+    <h4 data-en="Why hold-out by family matters" data-cn="为什么按家族隔离很关键">Why hold-out by family matters</h4>
+    <p data-en="This setting directly simulates the real pain point: a new family arrives, and the old classifier must react." data-cn="这种设置直接模拟了真正的痛点：一个新家族来了，而旧分类器必须马上应对。">This setting directly simulates the real pain point: a new family arrives, and the old classifier must react.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+<div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: dataset overview or table showing Drebin, Malradar, and Extended.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Dataset-overview figure slot.</div>
 </div>
@@ -925,6 +946,27 @@ if drift_score &gt; tau:
     <h4 data-en="Intra-class AUC" data-cn="家族内 AUC 提升">Intra-class AUC</h4>
 
     <p data-en="Also beats HCC on intra-class drift (new variants within same family). Dream works for both types." data-cn="在家族内 drift（同一家族内新变种）上也击败了 HCC。Dream 对两种类型都有效。">Also beats HCC on intra-class drift (new variants within same family). Dream works for both types.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+<div class="fig">
+  <img src="assets/generated/dream-results-visual.png" alt="Generated results visual for Dream presentation">
+  <div class="fig-cap"><em>Generated visual</em> — An audience-friendly snapshot of labeling savings, AUC gain, and runtime speed.</div>
+</div>
+
+<div class="grid3">
+  <div class="hl">
+    <h4 data-en="Teacher-friendly reading" data-cn="老师最容易抓住的点">Teacher-friendly reading</h4>
+    <p data-en="This is not just 'slightly better'. Dream changes both cost and accuracy at the same time, which is much harder to achieve." data-cn="这不是“略微更好”，而是同时改善了成本和准确率，而这件事本身就更难做到。">This is not just 'slightly better'. Dream changes both cost and accuracy at the same time, which is much harder to achieve.</p>
+  </div>
+  <div class="hl yellow">
+    <h4 data-en="Why 76.6% matters" data-cn="为什么 76.6% 很重要">Why 76.6% matters</h4>
+    <p data-en="In practice, expert labeling is the expensive part. Reducing that cost is often more valuable than adding one more point of accuracy." data-cn="在实际系统里，最贵的往往是专家标注。把这部分成本压下来，很多时候比再多一点点精度更有价值。">In practice, expert labeling is the expensive part. Reducing that cost is often more valuable than adding one more point of accuracy.</p>
+  </div>
+  <div class="hl orange">
+    <h4 data-en="Why 0.57ms matters" data-cn="为什么 0.57ms 很重要">Why 0.57ms matters</h4>
+    <p data-en="Fast online detection means Dream can be inserted into a real pipeline without becoming the new bottleneck." data-cn="在线检测足够快，意味着 Dream 可以直接塞进真实流水线里，而不会自己变成新的瓶颈。">Fast online detection means Dream can be inserted into a real pipeline without becoming the new bottleneck.</p>
   </div>
 </div>
 
@@ -996,6 +1038,26 @@ if drift_score &gt; tau:
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: any extra supporting result you want for backup or Q&A.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Extra-result figure slot.</div>
 </div>
+
+<div class="spacer"></div>
+<div class="grid2">
+  <div class="col">
+    <h3 data-en="What traditional methods miss" data-cn="传统方法少了什么">What traditional methods miss</h3>
+    <ul>
+      <li data-en="They often rank samples by generic anomaly, not classifier impact." data-cn="它们经常按“泛化异常性”挑样本，而不是按对分类器的真实影响来挑。">They often rank samples by generic anomaly, not classifier impact.</li>
+      <li data-en="They usually throw away concept-level expert reasoning after labeling." data-cn="它们通常在标注后就把 concept 层面的专家推理扔掉了。">They usually throw away concept-level expert reasoning after labeling.</li>
+      <li data-en="They may work locally, but the whole update loop stays inefficient." data-cn="它们可能局部有效，但整个更新闭环依然低效。">They may work locally, but the whole update loop stays inefficient.</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h3 data-en="What Dream adds" data-cn="Dream 额外带来了什么">What Dream adds</h3>
+    <ul>
+      <li data-en="Classifier-aware sample selection." data-cn="感知分类器的样本选择。">Classifier-aware sample selection.</li>
+      <li data-en="Concept-level explanatory adaptation." data-cn="concept 层面的可解释适配。">Concept-level explanatory adaptation.</li>
+      <li data-en="A tighter connection between detection, explanation, and retraining." data-cn="检测、解释和重训练之间更紧的连接。">A tighter connection between detection, explanation, and retraining.</li>
+    </ul>
+  </div>
+</div>
 </div>
 
 <!-- SLIDE 15 -->
@@ -1031,6 +1093,11 @@ if drift_score &gt; tau:
 
 <div class="slide-title" data-en="Three Things to Remember" data-cn="三个核心要点">Three Things to Remember</div>
 
+<div class="fig">
+  <img src="assets/generated/dream-summary-visual.png" alt="Generated summary visual for Dream presentation">
+  <div class="fig-cap"><em>Generated visual</em> — Dream as one connected loop between model, explanation, and expert feedback.</div>
+</div>
+
 <div class="triad">
   <div class="card pop">
     <div class="icon">🔍</div>
@@ -1046,6 +1113,22 @@ if drift_score &gt; tau:
     <div class="icon">🚀</div>
     <h4 data-en="Big Real Savings" data-cn="实际效果显著">Big Real Savings</h4>
     <p data-en="76.6% less labeling work. 3x faster. Works for new families AND new variants. All in one system." data-cn="标注工作量减少 76.6%。快 3 倍。对新家族和新变种都有效。一个系统全搞定。">76.6% less labeling work. 3x faster. Works for new families AND new variants. All in one system.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
+<div class="grid3">
+  <div class="hl">
+    <h4 data-en="If the teacher asks 'Why should I care?'" data-cn="如果老师问“我为什么要在意？”">If the teacher asks 'Why should I care?'</h4>
+    <p data-en="Because Dream improves not just a score, but the whole maintenance loop of a malware classifier." data-cn="因为 Dream 改进的不只是一个分数，而是恶意软件分类器的整条维护闭环。">Because Dream improves not just a score, but the whole maintenance loop of a malware classifier.</p>
+  </div>
+  <div class="hl yellow">
+    <h4 data-en="If the teacher asks 'What is the core novelty?'" data-cn="如果老师问“核心新意是什么？”">If the teacher asks 'What is the core novelty?'</h4>
+    <p data-en="The novelty is the bridge: concept-aware detection tied to the classifier, plus concept-level feedback reused during adaptation." data-cn="核心新意是那座桥：把感知分类器的 concept 检测和 concept 级别反馈适配连在了一起。">The novelty is the bridge: concept-aware detection tied to the classifier, plus concept-level feedback reused during adaptation.</p>
+  </div>
+  <div class="hl orange">
+    <h4 data-en="If the teacher asks 'What is the real-world value?'" data-cn="如果老师问“真实价值是什么？”">If the teacher asks 'What is the real-world value?'</h4>
+    <p data-en="It lowers human labeling cost while keeping the detection loop fast enough for deployment." data-cn="它在保持部署速度的同时，明显降低了人工标注成本。">It lowers human labeling cost while keeping the detection loop fast enough for deployment.</p>
   </div>
 </div>
 
