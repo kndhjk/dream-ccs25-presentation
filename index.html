@@ -235,6 +235,12 @@ tr:hover td{background:rgba(96,165,250,.05)}
 .hint-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
 .hint-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--muted);
   font-size:12px;padding:8px 12px;border-radius:999px}
+.qr-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin-top:20px}
+.qr-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;text-align:center}
+.qr-card img{width:220px;max-width:100%;border-radius:12px;background:#fff;padding:10px}
+.qr-card .scan-title{font-size:14px;font-weight:800;color:#fff;margin-top:10px}
+.qr-card .scan-note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:6px}
+.qr-link{font-size:11px;color:var(--accent);word-break:break-all;margin-top:10px}
 
 @media (max-width: 980px){
   #topbar{height:auto;min-height:52px;flex-wrap:wrap;gap:10px;padding:10px 14px}
@@ -246,6 +252,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
   .slide-title{font-size:28px}
   .slide-subtitle{font-size:16px}
   .grid2,.grid3,.grid-4,.triad,.split{grid-template-columns:1fr}
+  .qr-hero{grid-template-columns:1fr}
   .banner .val{font-size:22px}
   .timer{position:static;transform:none}
   .slide-jump{max-width:48vw}
@@ -294,15 +301,25 @@ tr:hover td{background:rgba(96,165,250,.05)}
 ═════════════════════════════════ -->
 <div class="slide active" id="s0">
 <div class="interlude" style="max-width:700px;margin:60px auto">
-  <div class="emoji">🤖 + 🛡️</div>
-  <h3>Combating Concept Drift</h3>
-  <p>CCS 2025 · Android Malware Classification · Interactive Presentation</p>
-  <p style="font-size:13px;color:var(--accent)">浙江大学 · 区块链与数据安全国家重点实验室</p>
-  <button onclick="nextSlide()" style="margin-top:8px">▶ 开始演讲</button>
-  <div class="hint-row">
-    <span class="hint-chip">← → / Space 切页</span>
-    <span class="hint-chip">CN / EN 一键切换双语</span>
-    <span class="hint-chip">⛶ 全屏展示更适合答辩</span>
+  <div class="qr-hero">
+    <div>
+      <div class="emoji">🤖 + 🛡️</div>
+      <h3>Combating Concept Drift</h3>
+      <p>CCS 2025 · Android Malware Classification · Interactive Presentation</p>
+      <p style="font-size:13px;color:var(--accent)">浙江大学 · 区块链与数据安全国家重点实验室</p>
+      <button onclick="nextSlide()" style="margin-top:8px">▶ 开始演讲</button>
+      <div class="hint-row">
+        <span class="hint-chip">← → / Space 切页</span>
+        <span class="hint-chip">CN / EN 一键切换双语</span>
+        <span class="hint-chip">⛶ 全屏展示更适合答辩</span>
+      </div>
+    </div>
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fkndhjk.github.io%2Fdream-ccs25-presentation%2F" alt="QR code for Dream online presentation">
+      <div class="scan-title">扫码进入在线演示</div>
+      <div class="scan-note">让所有人直接在自己手机上打开这份互动讲解页，后面看图、小游戏、双语切换都会方便很多。</div>
+      <div class="qr-link">kndhjk.github.io/dream-ccs25-presentation</div>
+    </div>
   </div>
 </div>
 <div class="spacer"></div>
