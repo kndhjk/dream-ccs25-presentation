@@ -571,8 +571,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the full Dream loop used while introducing the framework.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Dream loop figure slot.</div>
+  <img src="assets/web/paper-fig2-design-insights.png" alt="Paper figure: Dream design insights">
+  <div class="fig-cap"><em>Paper figure</em> — A real overview figure showing how Dream connects detection and adaptation.</div>
 </div>
 
 <div class="spacer"></div>
@@ -648,8 +648,8 @@ tr:hover td{background:rgba(96,165,250,.05)}
 
 <div class="spacer"></div>
 <div class="fig">
-  <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: concept-space or latent-space figure showing how behaviors are organized.</span></div></div>
-  <div class="fig-cap"><em>Placeholder</em> — Concept-space figure slot.</div>
+  <img src="assets/web/paper-fig7-heatmap.png" alt="Paper figure: concept-based drift explanation heatmap">
+  <div class="fig-cap"><em>Paper figure</em> — A real concept-level explanation view, showing that Dream reasons in behavior space rather than only family labels.</div>
 </div>
 </div>
 
@@ -713,6 +713,36 @@ if drift_score &gt; tau:
 <div class="script"><strong>Speaker tip:</strong> <span data-en="Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects." data-cn="在白板上画：x → [自编码器] → x̂ → [分类器 M] → 比较 M(x) 和 M(x̂)。问：如果它们不同意味着什么？对——检测器使用的概念和分类器预期的对不上。">Draw on board: x → [AutoEncoder] → x̂ → [Classifier M] → Compare M(x) with M(x̂). Ask: what does it mean if they differ? Exactly — the concepts used by the detector don't match what the classifier expects.</span></div>
 </div>
 
+<!-- SLIDE 8.5 / GAME -->
+<div class="slide" id="s8game">
+<div class="speaker-tag s2">👤 Speaker 2</div>
+<span class="slide-tag">Part 2 · Mini Game</span>
+
+<div class="slide-title" data-en="Mini Game — Drift or Not?" data-cn="小游戏——发生 drift 了吗？">Mini Game — Drift or Not?</div>
+<div class="slide-subtitle" data-en="Let the audience vote together before you reveal Dream's logic." data-cn="让大家先一起猜，再揭晓 Dream 的判断逻辑。">Let the audience vote together before you reveal Dream's logic.</div>
+
+<div class="quiz-q">
+  <h4 data-en="Case A: The classifier gives almost the same prediction on x and x̂. What should Dream think?" data-cn="情景 A：分类器对 x 和 x̂ 的预测几乎一样。Dream 应该怎么判断？">Case A: The classifier gives almost the same prediction on x and x̂. What should Dream think?</h4>
+  <button class="quiz-option" onclick="checkQuiz(this, 'correct', 'game1')" data-en="Low drift risk — the learned concepts still match the classifier." data-cn="低 drift 风险——学到的 concept 仍然和分类器对得上。">Low drift risk — the learned concepts still match the classifier.</button>
+  <button class="quiz-option" onclick="checkQuiz(this, 'wrong', 'game1')" data-en="High drift risk — immediately alert the expert." data-cn="高 drift 风险——立刻报警给专家。">High drift risk — immediately alert the expert.</button>
+  <button class="quiz-option" onclick="checkQuiz(this, 'wrong', 'game1')" data-en="Impossible to tell — Dream needs the training set first." data-cn="无法判断——Dream 必须先回看训练集。">Impossible to tell — Dream needs the training set first.</button>
+  <div class="quiz-feedback" id="game1"></div>
+</div>
+
+<div class="quiz-q">
+  <h4 data-en="Case B: x and x̂ look close in latent space, but the classifier changes its mind a lot. What is the strongest signal?" data-cn="情景 B：x 和 x̂ 在隐空间里看起来接近，但分类器的判断变化很大。最强的信号是什么？">Case B: x and x̂ look close in latent space, but the classifier changes its mind a lot. What is the strongest signal?</h4>
+  <button class="quiz-option" onclick="checkQuiz(this, 'wrong', 'game2')" data-en="No drift — because latent distance is small." data-cn="没有 drift——因为隐空间距离很小。">No drift — because latent distance is small.</button>
+  <button class="quiz-option" onclick="checkQuiz(this, 'correct', 'game2')" data-en="Likely drift — classifier disagreement matters more here." data-cn="很可能 drift——这里更关键的是分类器前后不一致。">Likely drift — classifier disagreement matters more here.</button>
+  <button class="quiz-option" onclick="checkQuiz(this, 'wrong', 'game2')" data-en="Only a family-label change matters." data-cn="只有家族标签变化才重要。">Only a family-label change matters.</button>
+  <div class="quiz-feedback" id="game2"></div>
+</div>
+
+<div class="hl orange">
+  <h4 data-en="How to play it live" data-cn="现场怎么玩">How to play it live</h4>
+  <p data-en="Ask the room to raise hands or shout A/B/C first. Then click the answer. This usually wakes people up and helps them remember Dream's core idea: classifier disagreement is the signal." data-cn="可以先让全场举手或者喊 A/B/C，再点答案。这个小互动很容易把大家拉回来，也更容易记住 Dream 的核心：关键看分类器前后是不是改主意。">Ask the room to raise hands or shout A/B/C first. Then click the answer. This usually wakes people up and helps them remember Dream's core idea: classifier disagreement is the signal.</p>
+</div>
+</div>
+
 <!-- SLIDE 9 -->
 <div class="slide" id="s9">
 <div class="speaker-tag s2">👤 Speaker 2</div>
@@ -744,8 +774,8 @@ if drift_score &gt; tau:
     <h3 data-en="The Full Objective" data-cn="完整目标函数">The Full Objective</h3>
     <div class="eq">L = λ₀L_rec + λ₁L_sep + λ₂L_pre + λ₃L_rel</div>
     <div class="fig" style="margin-top:12px">
-      <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the training objective / four-term loss equation figure.</span></div></div>
-      <div class="fig-cap"><em>Placeholder</em> — Training-objective figure slot.</div>
+      <img src="assets/web/paper-fig3-model-sensitive-learning.png" alt="Paper figure: Dream objective and model-sensitive concept learning">
+      <div class="fig-cap"><em>Paper figure</em> — Real paper figure supporting the objective and concept-learning discussion.</div>
     </div>
     <ul>
       <li><strong>L_rec</strong>: <span data-en="reconstruction quality" data-cn="重建质量">reconstruction quality</span></li>
@@ -1219,7 +1249,7 @@ function showSlide(i, syncHash = true) {
   if (syncHash) history.replaceState(null, '', `#s${current}`);
   applyLang();
   document.querySelectorAll('#topbar .nav button').forEach((b, idx) => {
-    b.classList.toggle('active', (idx === 0 && current < 6) || (idx === 1 && current >= 6 && current < 12) || (idx === 2 && current >= 12 && current < 17) || (idx === 3 && current >= 17));
+    b.classList.toggle('active', (idx === 0 && current < 6) || (idx === 1 && current >= 6 && current < 13) || (idx === 2 && current >= 13 && current < 18) || (idx === 3 && current >= 18));
   });
 }
 
@@ -1228,7 +1258,7 @@ function prevSlide() { showSlide(current - 1); }
 function jumpToSlide(i) { showSlide(Number(i)); }
 
 function goPart(p) {
-  const map = {1:0, 2:6, 3:12, 4:17};
+  const map = {1:0, 2:6, 3:13, 4:18};
   showSlide(map[p] || 0);
 }
 
