@@ -464,6 +464,18 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <h4 data-en="Dream's Goal" data-cn="Dream 的目标">Dream's Goal</h4>
   <p data-en="Address BOTH problems: make detection model-sensitive AND make adaptation use expert knowledge fully — not just a label." data-cn="同时解决两个问题：让检测感知分类器、让适配充分利用专家知识——而不只是一个标签。">Address BOTH problems: make detection model-sensitive AND make adaptation use expert knowledge fully — not just a label.</p>
 </div>
+
+<div class="spacer"></div>
+<div class="grid2">
+  <div class="hl yellow">
+    <h4 data-en="Traditional methods usually do this" data-cn="传统方法通常是这样">Traditional methods usually do this</h4>
+    <p data-en="Detect with a separate detector → send samples to experts → keep only labels → retrain the classifier. Each step is reasonable, but the whole loop wastes information." data-cn="用一个独立检测器先找异常 → 交给专家 → 最后只保留标签 → 再重新训练分类器。每一步看起来都合理，但整个流程会浪费很多信息。">Detect with a separate detector → send samples to experts → keep only labels → retrain the classifier. Each step is reasonable, but the whole loop wastes information.</p>
+  </div>
+  <div class="hl orange">
+    <h4 data-en="Dream changes the whole loop" data-cn="Dream 改的是整个闭环">Dream changes the whole loop</h4>
+    <p data-en="Detection is tied to the classifier, and adaptation keeps concept-level expert knowledge. So Dream is not just a better detector — it is a better end-to-end updating framework." data-cn="Dream 把检测和分类器绑在一起，同时在适配时保留 concept 层面的专家知识。所以它不只是“检测器更强”，而是整个更新闭环都更强。">Detection is tied to the classifier, and adaptation keeps concept-level expert knowledge. So Dream is not just a better detector — it is a better end-to-end updating framework.</p>
+  </div>
+</div>
 </div>
 
 <!-- SLIDE 5 -->
@@ -526,6 +538,25 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: the full Dream loop used while introducing the framework.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Dream loop figure slot.</div>
+</div>
+
+<div class="spacer"></div>
+<div class="grid3">
+  <div class="card pop">
+    <div class="icon">🎯</div>
+    <h4 data-en="Advantage 1" data-cn="优势 1">Advantage 1</h4>
+    <p data-en="Classifier-aware detection: Dream checks what the real target model cares about, instead of using a detached anomaly view." data-cn="感知分类器：Dream 检测的是目标分类器真正关心的东西，而不是一个脱节的异常分数。">Classifier-aware detection: Dream checks what the real target model cares about, instead of using a detached anomaly view.</p>
+  </div>
+  <div class="card pop pop-delay-1">
+    <div class="icon">⚡</div>
+    <h4 data-en="Advantage 2" data-cn="优势 2">Advantage 2</h4>
+    <p data-en="No train-data lookup at test time: this makes deployment faster, lighter, and easier in real environments." data-cn="测试时不需要回查训练数据：这让它在真实环境里更快、更轻、更容易部署。">No train-data lookup at test time: this makes deployment faster, lighter, and easier in real environments.</p>
+  </div>
+  <div class="card pop pop-delay-2">
+    <div class="icon">🧩</div>
+    <h4 data-en="Advantage 3" data-cn="优势 3">Advantage 3</h4>
+    <p data-en="Concept-guided adaptation: the expert does not only say what the sample is, but also why — so each labeled sample becomes more valuable." data-cn="concept 引导适配：专家不只告诉系统“它是什么”，还告诉系统“为什么”，所以每个标注样本都更有价值。">Concept-guided adaptation: the expert does not only say what the sample is, but also why — so each labeled sample becomes more valuable.</p>
+  </div>
 </div>
 
 <div class="spacer"></div>
@@ -856,6 +887,18 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 
 <div class="spacer"></div>
+<div class="grid2">
+  <div class="hl">
+    <h4 data-en="Why Dream is stronger than traditional methods" data-cn="为什么 Dream 比传统方法更强">Why Dream is stronger than traditional methods</h4>
+    <p data-en="Traditional methods usually optimize one stage at a time: either better anomaly detection or better retraining. Dream improves the connection between stages, so the whole workflow becomes more efficient." data-cn="传统方法通常只优化其中一个阶段：要么提升异常检测，要么提升重新训练。Dream 改进的是阶段之间的连接，所以整个工作流都会更高效。">Traditional methods usually optimize one stage at a time: either better anomaly detection or better retraining. Dream improves the connection between stages, so the whole workflow becomes more efficient.</p>
+  </div>
+  <div class="hl yellow">
+    <h4 data-en="Practical takeaway" data-cn="实际 takeaway">Practical takeaway</h4>
+    <p data-en="Dream selects better samples, needs fewer labels, gives more explanation, and runs faster online. That combination is the real advantage — not just one higher metric." data-cn="Dream 挑样本更准、需要标签更少、解释能力更强，而且在线运行更快。真正的优势是这几个点组合在一起，而不只是某个单独指标更高。">Dream selects better samples, needs fewer labels, gives more explanation, and runs faster online. That combination is the real advantage — not just one higher metric.</p>
+  </div>
+</div>
+
+<div class="spacer"></div>
 <div class="fig">
   <div class="fig-placeholder"><div><strong>Placeholder — add your own screenshot here</strong><span>Suggested content: comparison table showing Dream vs baseline capabilities.</span></div></div>
   <div class="fig-cap"><em>Placeholder</em> — Comparison-table slot.</div>
@@ -890,6 +933,7 @@ tr:hover td{background:rgba(96,165,250,.05)}
 <div class="banner">
   <div class="label" data-en="Simple takeaway" data-cn="一句话 takeaway">Simple takeaway</div>
   <div class="val" data-en="Better detection because it is classifier-aware. Better adaptation because it uses behavior information, not just labels." data-cn="检测更准，因为它贴近分类器；更新更有效，因为它利用行为信息，而不只是标签。">Better detection because it is classifier-aware. Better adaptation because it uses behavior information, not just labels.</div>
+  <div class="note" data-en="So compared with traditional methods, Dream is stronger in four ways: sample selection, explanation, labeling efficiency, and online speed." data-cn="所以和传统方法相比，Dream 的优势可以概括成四点：样本选择更准、解释更强、标注效率更高、在线速度更快。">So compared with traditional methods, Dream is stronger in four ways: sample selection, explanation, labeling efficiency, and online speed.</div>
 </div>
 </div>
 
