@@ -792,13 +792,12 @@ if drift_score &gt; tau:
 </div>
 
 <div class="hl orange">
-  <h4 data-en="How to use it live" data-cn="现场怎么用更顺">How to use it live</h4>
-  <p data-en="Do not ask for formal voting. Just pause, let everyone think for a moment, then say: 'If your instinct was A, now let's see why.' That keeps the interaction light and easy to control." data-cn="不要把它做成正式投票。你只要停顿一下，让大家先想一想，然后说：'如果你刚刚第一反应是 A，我们现在看看为什么。' 这样互动轻一点，也更好收场。">Do not ask for formal voting. Just pause, let everyone think for a moment, then say: 'If your instinct was A, now let's see why.' That keeps the interaction light and easy to control.</p>
+  <h4 data-en="Question to the audience" data-cn="可以直接问观众">Question to the audience</h4>
+  <p data-en="You can ask: if the classifier gives almost the same prediction on x and x̂, does that suggest low drift risk or high drift risk? Then click to reveal the answer." data-cn="你可以直接问观众：如果分类器对 x 和 x̂ 的预测几乎一样，这更像是低 drift 风险，还是高 drift 风险？然后再点击揭晓答案。">You can ask: if the classifier gives almost the same prediction on x and x̂, does that suggest low drift risk or high drift risk? Then click to reveal the answer.</p>
 </div>
 
 <div class="mini-game-toolbar">
   <button class="ghost-btn" onclick="resetMiniGame()" data-en="Reset game" data-cn="重置小游戏">Reset game</button>
-  <button class="ghost-btn" onclick="showMiniGameHint()" data-en="Presenter hint" data-cn="主持提示">Presenter hint</button>
 </div>
 </div>
 
@@ -1440,12 +1439,6 @@ function resetMiniGame() {
     fb.className = 'quiz-feedback';
     fb.textContent = '';
   });
-}
-
-function showMiniGameHint() {
-  alert(lang === 'en'
-    ? 'Presenter tip: do not collect votes. Just pause for 3 seconds, let everyone think, then reveal the answer and explain why classifier disagreement is the key signal.'
-    : '主持建议：不要收票。你只要停顿 3 秒，让大家先想一下，然后直接揭晓答案，再解释为什么“分类器前后不一致”才是关键。');
 }
 
 // ── KEYBOARD NAV ──
