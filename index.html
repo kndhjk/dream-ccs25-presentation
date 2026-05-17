@@ -284,18 +284,24 @@ tr:hover td{background:rgba(96,165,250,.05)}
   <div class="card pop">
     <div class="icon">👤</div>
     <h4>Speaker 1</h4>
-    <p>Problem & Background<br>~7–10 min</p>
+    <p>Slides 1–5<br>Problem, drift types, old pipeline, two problems, transition</p>
   </div>
   <div class="card pop pop-delay-1">
     <div class="icon">👤</div>
     <h4>Speaker 2</h4>
-    <p>Dream System<br>~7–10 min</p>
+    <p>Slides 6–11<br>Dream overview, concepts, detection, concept learning, adaptation, intuition</p>
   </div>
   <div class="card pop pop-delay-2">
     <div class="icon">👤</div>
     <h4>Speaker 3</h4>
-    <p>Results & Q&amp;A<br>~7–10 min</p>
+    <p>Slides 12–16<br>Setup, results, comparison, one-line takeaway, conclusion</p>
   </div>
+</div>
+<div class="spacer"></div>
+<div class="banner" style="max-width:980px;margin:0 auto">
+  <div class="label">3-Person Flow</div>
+  <div class="val">P1 opens the problem → P2 explains Dream → P3 proves why it matters</div>
+  <div class="note">Recommended handoff: “Now that we know the two problems, Speaker 2 will explain how Dream solves them.” / “Now that the method is clear, Speaker 3 will show whether it actually works.”</div>
 </div>
 </div>
 
@@ -457,30 +463,30 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 </div>
 
-<!-- SLIDE 5 — INTERACTIVE QUIZ 1 -->
+<!-- SLIDE 5 -->
 <div class="slide" id="s5">
 <div class="speaker-tag">👤 Speaker 1</div>
-<span class="slide-tag">Part 1 · Quick Check 🧠</span>
+<span class="slide-tag">Part 1 · Transition</span>
 
-<div class="slide-title" data-en="Quick Check — Think Before We Move On!" data-cn="小测验——我们继续之前先想一想！">Quick Check — Think Before We Move On!</div>
+<div class="slide-title" data-en="Before We Move On, Remember These Two Things" data-cn="继续之前，先记住这两件事">Before We Move On, Remember These Two Things</div>
+<div class="slide-subtitle" data-en="This is the handoff slide from the problem to Dream itself." data-cn="这页就是从问题过渡到 Dream 方法本身。">This is the handoff slide from the problem to Dream itself.</div>
 
-<div class="quiz-q" id="quiz1">
-  <h4 data-en="❓ What is concept drift in malware classification?" data-cn="❓ 恶意软件分类中，什么是 concept drift？">❓ What is concept drift in malware classification?</h4>
-  <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz1-feedback')" data-en="When malware is detected by antivirus" data-cn="当恶意软件被杀毒软件检测到时">When malware is detected by antivirus</button>
-  <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz1-feedback')" data-en="When a new smartphone is released" data-cn="当新智能手机发布时">When a new smartphone is released</button>
-  <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz1-feedback')" data-en="When malware changes but the classifier stays the same → model gets worse" data-cn="当恶意软件变化但分类器不变 → 模型变差">When malware changes but the classifier stays the same → model gets worse</button>
-  <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz1-feedback')" data-en="When a user installs an app" data-cn="当用户安装一个应用时">When a user installs an app</button>
-  <div class="quiz-feedback" id="quiz1-feedback"></div>
+<div class="grid2">
+  <div class="hl yellow">
+    <h4 data-en="Takeaway 1" data-cn="要点 1">Takeaway 1</h4>
+    <p data-en="Concept drift means malware has changed, but the classifier has not kept up. The model still answers, but the answer may no longer be trustworthy." data-cn="Concept drift 的意思是：恶意软件变了，但分类器没有跟上。模型还会给答案，但答案可能已经不值得相信。">Concept drift means malware has changed, but the classifier has not kept up. The model still answers, but the answer may no longer be trustworthy.</p>
+  </div>
+  <div class="hl orange">
+    <h4 data-en="Takeaway 2" data-cn="要点 2">Takeaway 2</h4>
+    <p data-en="Dream mainly targets inter-class drift: the hard case where a completely new malware family appears and the classifier has never seen it before." data-cn="Dream 主要处理 inter-class drift：也就是最难的情况——一个全新的恶意软件家族出现，而分类器从来没见过。">Dream mainly targets inter-class drift: the hard case where a completely new malware family appears and the classifier has never seen it before.</p>
+  </div>
 </div>
 
 <div class="spacer"></div>
-
-<div class="quiz-q" id="quiz2">
-  <h4 data-en="❓ Which type of drift does Dream mainly focus on?" data-cn="❓ Dream 主要关注哪种类型的 drift？">❓ Which type of drift does Dream mainly focus on?</h4>
-  <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz2-feedback')" data-en="Intra-class drift (new variants within same family)" data-cn="Intra-class drift（同家族内新变种）">Intra-class drift (new variants within same family)</button>
-  <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz2-feedback')" data-en="Inter-class drift (brand new malware families)" data-cn="Inter-class drift（全新恶意软件家族）">Inter-class drift (brand new malware families)</button>
-  <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz2-feedback')" data-en="Both, but mostly intra-class" data-cn="两者都有，但主要是 intra-class">Both, but mostly intra-class</button>
-  <div class="quiz-feedback" id="quiz2-feedback"></div>
+<div class="banner">
+  <div class="label" data-en="Handoff" data-cn="交接句">Handoff</div>
+  <div class="val" data-en="Now that the problem is clear, Speaker 2 will explain Dream itself." data-cn="现在问题已经清楚了，接下来由 Speaker 2 讲 Dream 方法本身。">Now that the problem is clear, Speaker 2 will explain Dream itself.</div>
+  <div class="note" data-en="Suggested line: “So the next question is: how can we detect drift in a way that really matches the classifier, and then adapt using richer expert knowledge? That is where Dream comes in.”" data-cn="建议接话：'所以接下来的问题就是：我们怎么才能用真正贴近分类器的方式检测 drift，并且在更新时更充分地利用专家知识？这就是 Dream 要做的事。'">Suggested line: “So the next question is: how can we detect drift in a way that really matches the classifier, and then adapt using richer expert knowledge? That is where Dream comes in.”</div>
 </div>
 </div>
 
@@ -708,62 +714,35 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 </div>
 
-<!-- SLIDE 11 — INTERACTIVE CONCEPT DEMO -->
+<!-- SLIDE 11 -->
 <div class="slide" id="s11">
 <div class="speaker-tag s2">👤 Speaker 2</div>
-<span class="slide-tag">Part 2 · Interactive Demo 🎮</span>
+<span class="slide-tag">Part 2 · Intuition</span>
 
-<div class="slide-title" data-en="Try It Yourself! 👇" data-cn="自己试试！👇">Try It Yourself! 👇</div>
+<div class="slide-title" data-en="What This Slide Really Means" data-cn="这一页真正想表达什么">What This Slide Really Means</div>
+<div class="slide-subtitle" data-en="Dream is not trying to output only a black-box anomaly score." data-cn="Dream 不想只输出一个黑盒异常分数。">Dream is not trying to output only a black-box anomaly score.</div>
 
 <div class="grid2">
   <div class="col">
-    <h3 data-en="Click to Reveal: Detection Step-by-Step" data-cn="点击展开：检测逐步详解">Click to Reveal: Detection Step-by-Step</h3>
-
-    <div class="reveal-card" onclick="this.classList.toggle('open')">
-      <h4>① Sample arrives: "Xavier v6" (new variant)</h4>
-      <p data-en="A new sample labeled 'Xavier v6' arrives. It's the same family as Xavier, but with new behaviors." data-cn="一个标注为'Xavier v6'的新样本到达。它和 Xavier 同家族，但有新的行为。">A new sample labeled 'Xavier v6' arrives. It's the same family as Xavier, but with new behaviors.</p>
-      <div class="click-hint">→ Click to see what happens</div>
-    </div>
-
-    <div class="reveal-card" onclick="this.classList.toggle('open')">
-      <h4>② Dream rebuilds: x̂</h4>
-      <p data-en="Dream's autoencoder tries to rebuild the sample. Because the concept space learned from training, the reconstruction uses OLD concept patterns." data-cn="Dream 的自编码器尝试重建样本。因为概念空间是从训练数据学习的，重建用的是旧的模式。">Dream's autoencoder tries to rebuild the sample. Because the concept space learned from training, the reconstruction uses OLD concept patterns.</p>
-      <div class="click-hint">→ Click to see what happens</div>
-    </div>
-
-    <div class="reveal-card" onclick="this.classList.toggle('open')">
-      <h4>③ Compare M(x) vs M(x̂)</h4>
-      <p data-en="The classifier predicts on original x: 'Xavier family'. On rebuilt x̂: also 'Xavier'. They AGREE. Low drift score. This variant doesn't confuse the classifier." data-cn="分类器对原始 x 预测：'Xavier 家族'。对重建 x̂：也是'Xavier'。它们一致。低 drift 分数。这个变种没有把分类器搞混。">The classifier predicts on original x: 'Xavier family'. On rebuilt x̂: also 'Xavier'. They AGREE. Low drift score. This variant doesn't confuse the classifier.</p>
-      <div class="click-hint">→ Click to see next scenario</div>
-    </div>
-
-    <div class="reveal-card" onclick="this.classList.toggle('open')">
-      <h4>④ New family appears: "EvilBank v1"</h4>
-      <p data-en="A brand NEW family 'EvilBank v1' appears. Completely unseen in training. Dream rebuilds it using OLD concept patterns. The rebuilt version has very different banker-behavior concept. The classifier gives different predictions for x and x̂. → HIGH DRIFT SCORE. Alert!" data-cn="一个全新的家族'EvilBank v1'出现了。训练时完全没见过。Dream 用旧的概念模式重建它。重建版本有非常不同的银行行为概念。分类器对 x 和 x̂ 给出不同预测。→ 高 drift 分数。警报！">A brand NEW family 'EvilBank v1' appears. Completely unseen in training. Dream rebuilds it using OLD concept patterns. The rebuilt version has very different banker-behavior concept. The classifier gives different predictions for x and x̂. → HIGH DRIFT SCORE. Alert!</p>
-      <div class="click-hint">→ Click to continue</div>
+    <h3 data-en="Not Just “Something Is Weird”" data-cn="不只是“哪里怪怪的”">Not Just “Something Is Weird”</h3>
+    <p data-en="A normal detector may only say: this sample looks unusual. That is useful, but still vague. The analyst still has to do most of the reasoning alone." data-cn="普通检测器可能只会说：这个样本看起来不正常。这当然有用，但还是太模糊了。分析员仍然要自己完成大部分推理。">A normal detector may only say: this sample looks unusual. That is useful, but still vague. The analyst still has to do most of the reasoning alone.</p>
+    <div class="hl red">
+      <h4 data-en="Black-box problem" data-cn="黑盒问题">Black-box problem</h4>
+      <p data-en="The system gives a score, but not much explanation about which behavior changed and why the classifier may fail." data-cn="系统给了一个分数，但没有真正解释到底是哪种行为变了，也没有说明分类器为什么会失效。">The system gives a score, but not much explanation about which behavior changed and why the classifier may fail.</p>
     </div>
   </div>
-
   <div class="col">
-    <h3 data-en="Your Turn: Predict the Drift Score! 🎯" data-cn="轮到你了：预测 Drift 分数！🎯">Your Turn: Predict the Drift Score! 🎯</h3>
-
-    <div class="quiz-q" id="quiz3">
-      <h4 data-en="Scenario: Old malware 'BaseBridge' gets a minor update (same behaviors, slightly different code). What is the drift score?" data-cn="场景：旧恶意软件'BaseBridge'做了小更新（相同行为，代码略有不同）。Drift 分数是多少？">Scenario: Old malware 'BaseBridge' gets a minor update (same behaviors, slightly different code). What is the drift score?</h4>
-      <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz3-feedback')" data-en="Very High — new family!" data-cn="非常高——新家族！">Very High — new family!</button>
-      <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz3-feedback')" data-en="Low — same concepts, classifier agrees" data-cn="低——相同概念，分类器判断一致">Low — same concepts, classifier agrees</button>
-      <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz3-feedback')" data-en="Very High — code changed" data-cn="非常高——代码变了">Very High — code changed</button>
-      <div class="quiz-feedback" id="quiz3-feedback"></div>
-    </div>
-
-    <div class="quiz-q" id="quiz4">
-      <h4 data-en="Scenario: A BRAND NEW banking malware 'GhostBank' appears. It uses stealth-download + remote-control behaviors never seen in training. What is the drift score?" data-cn="场景：一个全新的网银恶意软件'GhostBank'出现。它使用了训练时从未见过的静默下载+远程控制行为。Drift 分数是多少？">Scenario: A BRAND NEW banking malware 'GhostBank' appears. It uses stealth-download + remote-control behaviors never seen in training. What is the drift score?</h4>
-      <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz4-feedback')" data-en="Very High — new behaviors + new family" data-cn="非常高——新行为 + 新家族">Very High — new behaviors + new family</button>
-      <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz4-feedback')" data-en="Low — similar name to existing" data-cn="低——名字和现有家族相似">Low — similar name to existing</button>
-      <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz4-feedback')" data-en="Zero — it's banking related" data-cn="零——它是网银相关的">Zero — it's banking related</button>
-      <div class="quiz-feedback" id="quiz4-feedback"></div>
+    <h3 data-en="Dream Tries to Speak the Expert's Language" data-cn="Dream 想和专家说同一种语言">Dream Tries to Speak the Expert's Language</h3>
+    <p data-en="Dream tries to point to the concept level: maybe the problem is remote control behavior, privacy stealing, or stealth download. That makes the conversation between expert and model much more natural." data-cn="Dream 会尽量把问题指到 concept 这一层：比如可能是远程控制、隐私窃取，或者静默下载这类行为出了问题。这样专家和模型之间的交流就自然得多。">Dream tries to point to the concept level: maybe the problem is remote control behavior, privacy stealing, or stealth download. That makes the conversation between expert and model much more natural.</p>
+    <div class="hl">
+      <h4 data-en="Simple summary" data-cn="一句话总结">Simple summary</h4>
+      <p data-en="Dream tries to make the human analyst and the model speak the same behavior language." data-cn="简单说，Dream 试着让人类分析员和模型说同一种“行为语言”。">Dream tries to make the human analyst and the model speak the same behavior language.</p>
     </div>
   </div>
 </div>
+
+<div class="spacer"></div>
+<div class="script"><strong>Suggested line:</strong> <span data-en="“So this page is really building intuition. Dream does not only say that a sample is suspicious. It also tries to say which behavior may be causing the issue. That is why the expert and the system can work together more naturally.”" data-cn="'所以这一页主要是在帮大家建立直觉。Dream 不只是说一个样本可疑，它还尽量说明可能是哪种行为导致了这个问题。也正因为这样，专家和系统才能更自然地协作。'">“So this page is really building intuition. Dream does not only say that a sample is suspicious. It also tries to say which behavior may be causing the issue. That is why the expert and the system can work together more naturally.”</span></div>
 </div>
 
 <!-- ═══════════════════════════════
@@ -886,29 +865,28 @@ tr:hover td{background:rgba(96,165,250,.05)}
 </div>
 </div>
 
-<!-- SLIDE 15 — INTERACTIVE QUIZ 3 -->
+<!-- SLIDE 15 -->
 <div class="slide" id="s15">
 <div class="speaker-tag s3">👤 Speaker 3</div>
-<span class="slide-tag">Part 3 · Knowledge Check</span>
+<span class="slide-tag">Part 3 · One-line Summary</span>
 
-<div class="slide-title" data-en="Final Check — Before Q&A! 🧠" data-cn="最终测验——Q&A 之前！🧠">Final Check — Before Q&A! 🧠</div>
+<div class="slide-title" data-en="Dream Is Better at Choosing Samples — and Better at Using Samples" data-cn="Dream 更会挑样本，也更会用样本">Dream Is Better at Choosing Samples — and Better at Using Samples</div>
 
 <div class="grid2">
-  <div class="quiz-q" id="quiz5">
-    <h4 data-en="❓ Why is Dream's detection faster than CADE?" data-cn="❓ 为什么 Dream 的检测比 CADE 快？">❓ Why is Dream's detection faster than CADE?</h4>
-    <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz5-feedback')" data-en="Dream uses a smaller model" data-cn="Dream 用的模型更小">Dream uses a smaller model</button>
-    <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz5-feedback')" data-en="CADE needs to query training data for k-NN; Dream doesn't need any reference data at test time" data-cn="CADE 需要查询训练数据进行 k-NN；Dream 测试时不需要任何参考数据">CADE needs to query training data for k-NN; Dream doesn't need any reference data at test time</button>
-    <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz5-feedback')" data-en="Dream runs on GPU, CADE on CPU" data-cn="Dream 在 GPU 上运行，CADE 在 CPU 上">Dream runs on GPU, CADE on CPU</button>
-    <div class="quiz-feedback" id="quiz5-feedback"></div>
+  <div class="hl">
+    <h4 data-en="Chooses better" data-cn="挑得更准">Chooses better</h4>
+    <p data-en="Dream's detection is closer to what the classifier actually cares about. So the selected drift samples are more meaningful and more useful for updating the model." data-cn="Dream 的检测更贴近分类器真正关心的东西，所以它挑出来的 drift 样本更有意义，也更值得拿去更新模型。">Dream's detection is closer to what the classifier actually cares about. So the selected drift samples are more meaningful and more useful for updating the model.</p>
   </div>
+  <div class="hl yellow">
+    <h4 data-en="Uses better" data-cn="用得更好">Uses better</h4>
+    <p data-en="Dream does not use only labels during adaptation. It also uses concept-level expert feedback, so each labeled sample carries much richer information." data-cn="Dream 在适配时不只用标签，还会用 concept 层面的专家反馈，所以每个被标注的样本都带来更丰富的信息。">Dream does not use only labels during adaptation. It also uses concept-level expert feedback, so each labeled sample carries much richer information.</p>
+  </div>
+</div>
 
-  <div class="quiz-q" id="quiz6">
-    <h4 data-en="❓ What makes adaptation in Dream more efficient than traditional methods?" data-cn="❓ 是什么让 Dream 的适配比传统方法更高效？">❓ What makes adaptation in Dream more efficient than traditional methods?</h4>
-    <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz6-feedback')" data-en="Experts label more samples per hour" data-cn="专家每小时标注更多样本">Experts label more samples per hour</button>
-    <button class="quiz-option" onclick="checkQuiz(this,'wrong','quiz6-feedback')" data-en="Dream uses a bigger training dataset" data-cn="Dream 使用更大的训练数据集">Dream uses a bigger training dataset</button>
-    <button class="quiz-option" onclick="checkQuiz(this,'correct','quiz6-feedback')" data-en="Experts provide CONCEPT REVISIONS, not just labels. The model understands WHY — far more informative per sample." data-cn="专家提供概念修订，而不只是标签。模型理解'为什么'——每个样本信息量大得多。">Experts provide CONCEPT REVISIONS, not just labels. The model understands WHY — far more informative per sample.</button>
-    <div class="quiz-feedback" id="quiz6-feedback"></div>
-  </div>
+<div class="spacer"></div>
+<div class="banner">
+  <div class="label" data-en="Simple takeaway" data-cn="一句话 takeaway">Simple takeaway</div>
+  <div class="val" data-en="Better detection because it is classifier-aware. Better adaptation because it uses behavior information, not just labels." data-cn="检测更准，因为它贴近分类器；更新更有效，因为它利用行为信息，而不只是标签。">Better detection because it is classifier-aware. Better adaptation because it uses behavior information, not just labels.</div>
 </div>
 </div>
 
