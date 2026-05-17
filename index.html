@@ -1278,7 +1278,6 @@ const total = slides.length;
 const numEl = document.getElementById('slideNum');
 const bar = document.getElementById('progress-bar');
 const slideJump = document.getElementById('slideJump');
-let touchStartX = null;
 const uploadStoragePrefix = 'dream-upload:';
 
 function updateViewportLayout() {
@@ -1449,22 +1448,12 @@ function showMiniGameHint() {
     : '主持建议：不要收票。你只要停顿 3 秒，让大家先想一下，然后直接揭晓答案，再解释为什么“分类器前后不一致”才是关键。');
 }
 
-// ── KEYBOARD / TOUCH NAV ──
+// ── KEYBOARD NAV ──
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
   if (e.key.toLowerCase() === 'f') toggleFullscreen();
 });
-
-document.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].clientX;
-}, { passive: true });
-document.addEventListener('touchend', e => {
-  if (touchStartX == null) return;
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 60) dx < 0 ? nextSlide() : prevSlide();
-  touchStartX = null;
-}, { passive: true });
 
 window.addEventListener('hashchange', () => {
   const m = location.hash.match(/^#s(\d+)$/);
